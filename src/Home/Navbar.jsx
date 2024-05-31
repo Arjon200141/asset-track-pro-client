@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
     const navlinks = <>
-        <li><a>Home</a></li>
+        <Link to="/"> <li><a>Home</a></li></Link>
         <li><a>Join as Employee</a></li>
         <li><a>Join as HR Manager</a></li>
         <li><a>Log In</a></li>
@@ -19,12 +21,12 @@ const Navbar = () => {
                 <a className="btn btn-ghost text-3xl font-bold"><span className="text-red-600">AssetTrack</span> Pro</a>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="text-2xl font-medium menu menu-horizontal px-1">
+                <ul className="ml-20 gap-4 text-2xl font-medium menu menu-horizontal px-1">
                     {navlinks}
                 </ul>
             </div>
             <div className="navbar-end">
-                
+
             </div>
         </div>
     );
