@@ -5,7 +5,7 @@ import Packages from "./Packages";
 
 const Home = () => {
     return (
-        <div className="merriweather-font">
+        <div className="merriweather-font bg-sky-50">
             <Navbar></Navbar>
             <Banner></Banner>
             <About></About>
