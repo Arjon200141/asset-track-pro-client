@@ -1,48 +1,80 @@
+import { useForm } from "react-hook-form";
 import { SlArrowDown } from "react-icons/sl";
+import { AuthContext } from "../Providers/AuthProviders";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const JoinHR = () => {
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { createUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const onSubmit = data => {
+        console.log(data);
+        createUser(data.email, data.password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                reset();
+                Swal.fire({
+                    title: "Account Registered!",
+                    text: "HR Registration Successfully!!!",
+                    icon: "success"
+                });
+                navigate('/');
+            })
+            .catch(error => console.error(error))
+    };
+
     return (
         <div className="bg-lime-50">
             <div className="mx-80 py-12 ">
             <div className="hero min-h-screen  ">
                 <div className=" w-full shadow-2xl bg-lime-100 rounded-xl">
                     <h2 className="text-4xl font-semibold text-center mt-8">Register a New HR Manager</h2>
-                    <form className="card-body">
+                    <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Full Name</span>
                             </label>
-                            <input type="text" name="name" placeholder="HR Name" className="input input-bordered" required />
+                            <input type="text" name="name" {...register("name", { required: true })} placeholder="HR Name" className="input input-bordered" />
+                            {errors.name && <span className='ml-4 text-lg font-medium text-orange-400'>Name is required</span>}
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Company Name</span>
                             </label>
-                            <input type="text" name="companyname" placeholder="Company Name" className="input input-bordered" required />
+                            <input type="text" name="companyname" {...register("companyname", { required: true })} placeholder="Company Name" className="input input-bordered" />
+                            {errors.name && <span className='ml-4 text-lg font-medium text-orange-400'>Company Name is required</span>}
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Company Logo</span>
                             </label>
-                            <input type="text" name="companylogo" placeholder="Company Logo URL" className="input input-bordered" required />
+                            <input type="text" name="companylogo" {...register("companylogo", { required: true })} placeholder="Company Logo URL" className="input input-bordered" />
+                            {errors.name && <span className='ml-4 text-lg font-medium text-orange-400'>Company Logo is required</span>}
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="email" name="email" placeholder="Email" className="input input-bordered" required />
+                            <input type="email" name="email" {...register("email", { required: true })} placeholder="Email" className="input input-bordered" />
+                            {errors.name && <span className='ml-4 text-lg font-medium text-orange-400'>Email is required</span>}
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" placeholder="Password" className="input input-bordered" required />
+                            <input type="password" placeholder="Password" {...register("password", { required: true })} className="input input-bordered" />
+                            {errors.name && <span className='ml-4 text-lg font-medium text-orange-400'>Password is required</span>}
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Date of Birth</span>
                             </label>
-                            <input type="date" name="date" className="input input-bordered" required />
+                            <input type="date" name="date" {...register("date", { required: true })} className="input input-bordered"/>
+                            {errors.name && <span className='ml-4 text-lg font-medium text-orange-400'>Date of Birth is required</span>}
                         </div>
                         <div className="flex justify-start items-end p-0 mt-4">
                             <div className="dropdown dropdown-right">

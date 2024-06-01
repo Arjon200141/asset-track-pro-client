@@ -5,13 +5,13 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey:import.meta.env.VITE_apiKey ,
-    authDomain:import.meta.env.VITE_authDomain ,
-    projectId:import.meta.env.VITE_projectId ,
-    storageBucket:import.meta.env.VITE_storageBucket ,
-    messagingSenderId:import.meta.env.VITE_messagingSenderId ,
-    appId:import.meta.env.VITE_appId 
+  apiKey: "AIzaSyAm3hzYWVuz3mEraJ54UhBH8KTMMq-Qp2E",
+  authDomain: "assettrack-pro.firebaseapp.com",
+  projectId: "assettrack-pro",
+  storageBucket: "assettrack-pro.appspot.com",
+  messagingSenderId: "471784895048",
+  appId: "1:471784895048:web:1205ba4f6cc9345e3b9e7d"
 };
-
+console.log(firebaseConfig);
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
