@@ -5,6 +5,7 @@ import Root from "../Root/Root";
 import Home from "../Home/Home";
 import JoinEmployee from "../Pages/JoinEmployee";
 import JoinHR from "../Pages/JoinHR";
+import LogIn from "../Pages/LogIn";
 
 
   const router = createBrowserRouter([
@@ -23,6 +24,10 @@ import JoinHR from "../Pages/JoinHR";
         {
           path:"/hrjoin",
           element:<JoinHR></JoinHR>
+        },
+        {
+          path:"/login",
+          element:<LogIn></LogIn>
         }
       ]
     }

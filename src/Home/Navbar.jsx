@@ -5,18 +5,25 @@ const Navbar = () => {
         <Link to="/"> <li><a>Home</a></li></Link>
         <Link to='/employeejoin'><li><a>Join as Employee</a></li></Link>
         <Link to='/hrjoin'><li><a>Join as HR Manager</a></li></Link>
-        <li><a>Log In</a></li>
+        <Link to="/login"><li><a>Log In</a></li></Link>
     </>
     // const navlinkshr = <>
-    //     <Link to="/"> <li><a>Home</a></li></Link>
-    //     <li><a>Join as Employee</a></li>
-    //     <li><a>Join as HR Manager</a></li>
-    //     <li><a>Log In</a></li>
+    //     <li><a>Home</a></li>
+    //     <li><a> My Assets</a></li>
+    //     <li><a>My Team</a></li>
+    //     <li><a>Request for an Asset</a></li>
+    //     <li><a>Profile</a></li>
+    //     <li><a>Log OUt</a></li>
     // </>
     // const navlinksemployees = <>
-    //     <Link to="/"> <li><a>Home</a></li></Link>
-    //     <li><a>Join as Employee</a></li>
-    //     <li><a>Join as HR Manager</a></li>
+    //     <li><a>Home</a></li>
+    //     <li><a>Asset List</a></li>
+    //     <li><a>Add an Asset</a></li>
+    //     <li><a> All Requests</a></li>
+    //     <li><a>Custom Requests List</a></li>
+    //     <li><a>My Employee List</a></li>
+    //     <li><a>Add an Employee</a></li>
+    //     <li><a>Profile</a></li>
     //     <li><a>Log In</a></li>
     // </>
     return (
