@@ -1,14 +1,17 @@
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { app } from "../firebase/firebase.config";
 
+
 export const AuthContext = createContext(null);
+const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(app);
 
 const AuthProviders = ({ children }) => {
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [userRole , setUserRole] = useState('');
 
     const createUser = (email, password) => {
         setLoading(true);
@@ -20,26 +23,33 @@ const AuthProviders = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
+    const signInWithGoogle = () => {
+        setLoading(true);
+        return signInWithPopup(auth, googleProvider);
+    }
+
     const logOut = () => {
         setLoading(true);
+        setUserRole('');
         return signOut(auth);
     }
 
     const updateUserProfile = (name, photo) => {
-        return updateProfile(auth.currentUser), {
-            displayName: name, PhotoURL: photo
-        }
+        return updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: photo
+        });
     }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
             setLoading(false);
-        })
+        });
         return () => {
-            return unsubscribe;
-        }
-    }, [])
+            unsubscribe();
+        };
+    }, []);
 
     const authInfo = {
         user,
@@ -48,7 +58,10 @@ const AuthProviders = ({ children }) => {
         loading,
         updateUserProfile,
         logOut,
-    }
+        signInWithGoogle,
+        setUserRole,
+        userRole
+    };
 
     return (
         <AuthContext.Provider value={authInfo}>

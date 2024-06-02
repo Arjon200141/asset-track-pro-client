@@ -1,17 +1,23 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProviders";
 import Swal from "sweetalert2";
+import SocialLogin from "./SocialLogin";
 
 const LogIn = () => {
 
-
+    const [users, setUsers] = useState([]);
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || "/";
 
-    const { signIn } = useContext(AuthContext);
+    const { signIn, setUserRole ,userRole } = useContext(AuthContext);
 
+    useEffect(() => {
+        fetch('http://localhost:5000/users')
+            .then(res => res.json())
+            .then(data => setUsers(data))
+    }, [])
     const handleLogIn = e => {
         e.preventDefault();
         const form = e.target;
@@ -27,9 +33,16 @@ const LogIn = () => {
                     text: "You have Logged In Successfully!!!",
                     icon: "success"
                 });
+
+                const match = users.find(item => item.userId == user.uid)
+                setUserRole(match.role);
+                console.log(userRole);
+                
+
                 navigate(from, { replace: true });
             })
     }
+
 
     return (
         <div className="hero-content py-12 bg-fuchsia-50">
@@ -57,9 +70,7 @@ const LogIn = () => {
                     <h2 className="text-xl font-medium text-center mb-3"> Continue With </h2>
                 </div>
 
-                <div className="mb-6 flex justify-center items-center">
-                    <button className="btn mr-4 h-16 px-6 py-1 md:ml-8 text-lg font-medium"><img src="https://i.ibb.co/LdbG43L/google-symbol.png" alt="" className="h-10 w-10" /> </button>
-                </div>
+                <SocialLogin></SocialLogin>
             </div>
         </div>
     );
