@@ -40,7 +40,7 @@ import RequestForAsset from "../EmployeePages/RequestForAsset";
         {
           path:"/assetlist",
           element:<AssetList></AssetList>,
-          loader: () => fetch('asset.json')
+          loader: () => fetch('http://localhost:5000/assets')
         },
         {
           path:"/addasset",
@@ -49,7 +49,7 @@ import RequestForAsset from "../EmployeePages/RequestForAsset";
         {
           path:"/request",
           element: <RequestForAsset></RequestForAsset>,
-          loader: () => fetch('asset.json')
+          loader: () => fetch('http://localhost:5000/assets')
         }
       ]
     }

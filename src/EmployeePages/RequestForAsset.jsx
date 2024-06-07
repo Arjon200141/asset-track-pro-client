@@ -19,7 +19,7 @@ const RequestForAsset = () => {
 
     const filteredData = assetData
         .filter((asset) =>
-            asset.productName.toLowerCase().includes(searchTerm)
+            asset?.productName?.toLowerCase().includes(searchTerm)
         )
         .filter((asset) =>
             stockFilter ? asset.stockStatus === stockFilter : true
@@ -30,7 +30,16 @@ const RequestForAsset = () => {
 
     const handleRequest = e => {
         e.preventDefault();
-        const id = selectedAsset.id;
+        if (!selectedAsset) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'No asset selected!',
+                icon: 'error',
+                confirmButtonText: 'Close'
+            });
+            return;
+        }
+        const id = selectedAsset._id;
         const name = selectedAsset.productName;
         const username = user.displayName;
         const useremail = user.email;
@@ -44,21 +53,21 @@ const RequestForAsset = () => {
             RequestDate: currentDate,
         };
         console.log(request);
-        fetch('https://mern-verse-server.vercel.app/booking', {
+        fetch('http://localhost:5000/requests', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(request)
         })
-            .then(res => {
-                res.json()
+            .then(res => res.json())
+            .then(() => {
                 Swal.fire({
                     title: 'Success!',
-                    text: 'Your Booking Has been Confirmed!!!',
+                    text: 'Your Request Has been Placed!!!',
                     icon: 'success',
                     confirmButtonText: 'Close'
-                })
+                });
             })
             .catch(error => {
                 console.log(error.message);
@@ -138,8 +147,8 @@ const RequestForAsset = () => {
                     <input type="checkbox" id="my_modal_6" className="modal-toggle" />
                     <div className="modal" role="dialog">
                         <form onSubmit={handleRequest} className="modal-box ">
-                            <div className="flex gap-6">
-                                <label className="form-control w-full ">
+                            <div className="">
+                                <label className="form-control w-full my-4">
                                     <div className="label">
                                         <span className="label-text text-xl font-semibold">Product Id</span>
                                     </div>
@@ -152,21 +161,7 @@ const RequestForAsset = () => {
                                     <input type="text" placeholder="Service Name" name="name" defaultValue={selectedAsset.productName} readOnly className="input input-bordered w-full " />
                                 </label>
                             </div>
-                            <div className="flex gap-6">
-                                <label className="form-control w-full ">
-                                    <div className="label">
-                                        <span className="label-text text-xl font-semibold">Current User Name</span>
-                                    </div>
-                                    <input type="text" placeholder="User Name" name="username" defaultValue={user.displayName} readOnly className="input input-bordered w-full " />
-                                </label>
-                                <label className="form-control w-full ">
-                                    <div className="label">
-                                        <span className="label-text text-xl font-semibold">Current User Email</span>
-                                    </div>
-                                    <input type="email" placeholder="User Email" name="useremail" defaultValue={user.email} readOnly className="input input-bordered w-full " />
-                                </label>
-                            </div>
-                            <div className="flex gap-6">
+                            <div className="flex gap-6 mt-4">
                                 <label className="form-control w-full ">
                                     <div className="label">
                                         <span className="label-text text-xl font-semibold">Additional Notes</span>
@@ -180,8 +175,8 @@ const RequestForAsset = () => {
                                     />
                                 </label>
                             </div>
-                            <input type="submit" value="Purchase Service" className="btn bg-red-100 w-full mt-6 text-xl font-semibold" />
-                            <div className="modal-action">
+                            <input type="submit" value="Request Asset" className="btn bg-red-100 w-full mt-6 text-xl font-semibold" />
+                            <div className="modal-action justify-center">
                                 <label htmlFor="my_modal_6" className="btn mt-6">Exit</label>
                             </div>
                         </form>
