@@ -9,6 +9,7 @@ import LogIn from "../Pages/LogIn";
 import Profile from "../EmployeePages/Profile";
 import AssetList from "../HRPages/AssetList";
 import AddAssetList from "../HRPages/AddAssetList";
+import RequestForAsset from "../EmployeePages/RequestForAsset";
 
 
   const router = createBrowserRouter([
@@ -44,6 +45,11 @@ import AddAssetList from "../HRPages/AddAssetList";
         {
           path:"/addasset",
           element:<AddAssetList></AddAssetList>
+        },
+        {
+          path:"/request",
+          element: <RequestForAsset></RequestForAsset>,
+          loader: () => fetch('asset.json')
         }
       ]
     }
