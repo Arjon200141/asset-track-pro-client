@@ -11,6 +11,10 @@ import AssetList from "../HRPages/AssetList";
 import AddAssetList from "../HRPages/AddAssetList";
 import RequestForAsset from "../EmployeePages/RequestForAsset";
 import MyAssets from "../EmployeePages/MyAssets";
+import AllRequest from "../HRPages/AllRequest";
+import EmployeeList from "../HRPages/EmployeeList";
+import AddEmployee from "../HRPages/AddEmployee";
+
 
 
   const router = createBrowserRouter([
@@ -56,6 +60,18 @@ import MyAssets from "../EmployeePages/MyAssets";
           path:"/myassets",
           element:<MyAssets></MyAssets>,
           loader: () => fetch('http://localhost:4000/requests')
+        },
+        {
+          path:"/allrequest",
+          element: <AllRequest></AllRequest>
+        },
+        {
+          path:"/myemployee",
+          element:<EmployeeList></EmployeeList>
+        },
+        {
+          path:"/addemployee",
+          element:<AddEmployee></AddEmployee>
         }
       ]
     }

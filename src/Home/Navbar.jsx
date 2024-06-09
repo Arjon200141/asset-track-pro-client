@@ -23,10 +23,9 @@ const Navbar = () => {
         <Link to="/"> <li><a>Home</a></li></Link>
         <Link to="/assetlist"><li><a>Asset List</a></li></Link>
         <Link to="/addasset"><li><a>Add an Asset</a></li></Link>
-        <li><a>All Requests</a></li>
-        <li><a>Custom Requests List</a></li>
-        <li><a>My Employee List</a></li>
-        <li><a>Add an Employee</a></li>
+        <Link to="/allrequest"><li><a>All Requests</a></li></Link>
+        <Link to="/myemployee"><li><a>My Employee List</a></li></Link>
+        <Link to="/addemployee"><li><a>Add an Employee</a></li></Link>
         <li><a>Profile</a></li>
     </>
 
@@ -45,17 +44,17 @@ const Navbar = () => {
                         {/* {user?. userRole == 'hr' ? navlinkshr :
                             userRole == 'employee' ? navlinksemployees :
                                 navlinks} */}
-                        {navlinkshr}
+                        {navlinksemployees}
                     </ul>
                 </div>
                 <a className="btn btn-ghost text-3xl font-bold"><span className="text-red-600">AssetTrack</span> Pro</a>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="ml-20 gap-4 text-2xl font-medium menu menu-horizontal px-1">
+                <ul className="ml-20 gap-2 text-lg font-medium menu menu-horizontal px-1">
                     {/* {user?. userRole === 'hr' ? navlinkshr :
                         userRole === 'employee' ? navlinksemployees :
                             navlinks} */}
-                    {navlinkshr}
+                    {navlinksemployees}
                 </ul>
             </div>
             <div className="navbar-end">
@@ -75,9 +74,9 @@ const Navbar = () => {
                                 {showName && <div className="absolute top-2 right-14 bg-emerald-100 shadow-md p-2 rounded-lg font-medium">{user.displayName || "Name not Found"}</div>}
                             </div>
 
-                            <Link onClick={handleLogOut} className="text-2xl font-medium mr-20"><a>Log Out</a></Link>
+                            <Link onClick={handleLogOut} className="text-xl font-medium "><a>Log Out</a></Link>
                         </div> :
-                        <Link to='/login' className="text-2xl font-medium mr-20"><a>Log In</a></Link>
+                        <Link to='/login' className="text-xl font-medium"><a>Log In</a></Link>
                 }
             </div>
         </div>

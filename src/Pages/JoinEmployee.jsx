@@ -46,8 +46,6 @@ const JoinEmployee = () => {
             })
     };
 
-
-
     return (
         <div className="bg-sky-50">
             <div className="mx-80 py-12 ">
