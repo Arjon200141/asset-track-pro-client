@@ -10,6 +10,7 @@ import Profile from "../EmployeePages/Profile";
 import AssetList from "../HRPages/AssetList";
 import AddAssetList from "../HRPages/AddAssetList";
 import RequestForAsset from "../EmployeePages/RequestForAsset";
+import MyAssets from "../EmployeePages/MyAssets";
 
 
   const router = createBrowserRouter([
@@ -40,7 +41,7 @@ import RequestForAsset from "../EmployeePages/RequestForAsset";
         {
           path:"/assetlist",
           element:<AssetList></AssetList>,
-          loader: () => fetch('http://localhost:5000/assets')
+          loader: () => fetch('http://localhost:4000/assets')
         },
         {
           path:"/addasset",
@@ -49,7 +50,12 @@ import RequestForAsset from "../EmployeePages/RequestForAsset";
         {
           path:"/request",
           element: <RequestForAsset></RequestForAsset>,
-          loader: () => fetch('http://localhost:5000/assets')
+          loader: () => fetch('http://localhost:4000/assets')
+        },
+        {
+          path:"/myassets",
+          element:<MyAssets></MyAssets>,
+          loader: () => fetch('http://localhost:4000/requests')
         }
       ]
     }

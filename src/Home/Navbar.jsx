@@ -13,8 +13,8 @@ const Navbar = () => {
         <Link to='/hrjoin'><li><a>Join as HR Manager</a></li></Link>
     </>
     const navlinksemployees = <>
-        <Link to="/"><li><a>Home</a></li></Link>
-        <li><a> My Assets</a></li>
+        <Link to="/"><li><a>Home</a></li></Link> 
+        <Link to="/myassets"><li><a> My Assets</a></li></Link>
         <li><a>My Team</a></li>
         <Link to="/request"><li><a>Request for an Asset</a></li></Link>
         <Link to='/eployeeprofile'><li><a>Profile</a></li></Link>
@@ -45,7 +45,7 @@ const Navbar = () => {
                         {/* {user?. userRole == 'hr' ? navlinkshr :
                             userRole == 'employee' ? navlinksemployees :
                                 navlinks} */}
-                        {navlinksemployees}
+                        {navlinkshr}
                     </ul>
                 </div>
                 <a className="btn btn-ghost text-3xl font-bold"><span className="text-red-600">AssetTrack</span> Pro</a>
@@ -55,7 +55,7 @@ const Navbar = () => {
                     {/* {user?. userRole === 'hr' ? navlinkshr :
                         userRole === 'employee' ? navlinksemployees :
                             navlinks} */}
-                    {navlinksemployees}
+                    {navlinkshr}
                 </ul>
             </div>
             <div className="navbar-end">

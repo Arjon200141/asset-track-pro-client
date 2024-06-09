@@ -41,19 +41,22 @@ const RequestForAsset = () => {
         }
         const id = selectedAsset._id;
         const name = selectedAsset.productName;
+        const type = selectedAsset.productType;
         const username = user.displayName;
         const useremail = user.email;
         const currentDate = new Date().toISOString();
         const request = {
-            ServiceId: id,
-            ServiceName: name,
+            ProductId: id,
+            ProductName: name,
+            ProductType: type,
             UserEmail: useremail,
             UserName: username,
             Notes: additionalNotes,
             RequestDate: currentDate,
+            RequestStatus:"Pending"
         };
         console.log(request);
-        fetch('http://localhost:5000/requests', {
+        fetch('http://localhost:4000/requests', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -159,6 +162,12 @@ const RequestForAsset = () => {
                                         <span className="label-text text-xl font-semibold">Product Name</span>
                                     </div>
                                     <input type="text" placeholder="Service Name" name="name" defaultValue={selectedAsset.productName} readOnly className="input input-bordered w-full " />
+                                </label>
+                                <label className="form-control w-full my-4">
+                                    <div className="label">
+                                        <span className="label-text text-xl font-semibold">Product Type</span>
+                                    </div>
+                                    <input type="text" placeholder="Service Type" name="type" defaultValue={selectedAsset.productType} readOnly className="input input-bordered w-full " />
                                 </label>
                             </div>
                             <div className="flex gap-6 mt-4">

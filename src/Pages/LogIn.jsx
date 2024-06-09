@@ -33,6 +33,7 @@ const LogIn = () => {
                     text: "You have Logged In Successfully!!!",
                     icon: "success"
                 });
+                navigate('/');
 
                 const match = users.find(item => item.userId == user.uid)
                 setUserRole(match.role);
