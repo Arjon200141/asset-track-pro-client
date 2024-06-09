@@ -1,44 +1,57 @@
-import { useLoaderData } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Navbar from "../Home/Navbar";
-import { useState } from "react";
+import useAxiosPublic from "../Axios/useAxiosPublic";
 
 const AssetList = () => {
-    const assetData = useLoaderData();
+    const [assets, setAssets] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [stockFilter, setStockFilter] = useState("");
     const [assetTypeFilter, setAssetTypeFilter] = useState("");
     const [sortOption, setSortOption] = useState("");
+    const axiosPublic = useAxiosPublic();
+
+    useEffect(() => {
+        const fetchAssets = async () => {
+            try {
+                const response = await axiosPublic.get("/assets");
+                setAssets(response.data);
+            } catch (error) {
+                console.error("Error fetching assets", error);
+            }
+        };
+        fetchAssets();
+    }, [axiosPublic]);
 
     const handleSearch = (e) => setSearchTerm(e.target.value.toLowerCase());
     const handleStockFilter = (e) => setStockFilter(e.target.value);
     const handleAssetTypeFilter = (e) => setAssetTypeFilter(e.target.value);
     const handleSortOption = (e) => setSortOption(e.target.value);
 
-    const filteredData = assetData
-        .filter((asset) =>
-            asset.productName.toLowerCase().includes(searchTerm)
-        )
-        .filter((asset) =>
-            stockFilter ? asset.stockStatus === stockFilter : true
-        )
-        .filter((asset) =>
-            assetTypeFilter ? asset.productType === assetTypeFilter : true
-        )
-        .sort((a, b) => {
-            if (sortOption === "quantityAsc") {
-                return a.productQuantity - b.productQuantity;
-            }
-            if (sortOption === "quantityDesc") {
-                return b.productQuantity - a.productQuantity;
-            }
-            return 0;
-        });
+    const handleAssetAdded = (newAsset) => {
+        setAssets([...assets, newAsset]);
+    };
+
+    const filteredData = assets.filter((asset) =>
+        asset.productName.toLowerCase().includes(searchTerm)
+    ).filter((asset) =>
+        stockFilter ? asset.stockStatus === stockFilter : true
+    ).filter((asset) =>
+        assetTypeFilter ? asset.productType === assetTypeFilter : true
+    ).sort((a, b) => {
+        if (sortOption === "quantityAsc") {
+            return a.productQuantity - b.productQuantity;
+        }
+        if (sortOption === "quantityDesc") {
+            return b.productQuantity - a.productQuantity;
+        }
+        return 0;
+    });
 
     return (
         <div>
             <Navbar />
             <div className="p-4 bg-emerald-50">
-                <h2 className="text-4xl font-semibold text-center"> All Assets</h2>
+                <h2 className="text-4xl font-semibold text-center">All Assets</h2>
                 <div className="ml-60 flex flex-col md:flex-row gap-4 my-10">
                     <input
                         type="text"
@@ -92,7 +105,7 @@ const AssetList = () => {
                         <tbody>
                             {filteredData.map((asset, index) => (
                                 <tr key={index}>
-                                    <td>{asset.id}</td>
+                                    <td>{index+1}</td>
                                     <td>{asset.productName}</td>
                                     <td>{asset.productType}</td>
                                     <td>{asset.productQuantity}</td>

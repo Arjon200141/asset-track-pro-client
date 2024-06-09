@@ -110,6 +110,7 @@ const MyAssets = () => {
                     <table className="table table-lg">
                         <thead>
                             <tr className="text-xl">
+                                <th></th>
                                 <th>Asset Name</th>
                                 <th>Asset Type</th>
                                 <th>Request Date</th>
@@ -119,8 +120,9 @@ const MyAssets = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {assets.map((asset) => (
+                            {assets.map((asset,index) => (
                                 <tr key={asset._id}>
+                                    <td>{index}</td>
                                     <td>{asset.ProductName}</td>
                                     <td>{asset.ProductType}</td>
                                     <td>{new Date(asset.RequestDate).toLocaleDateString()}</td>
