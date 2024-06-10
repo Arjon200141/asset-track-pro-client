@@ -53,13 +53,13 @@ const RequestForAsset = () => {
             UserName: username,
             Notes: additionalNotes,
             RequestDate: currentDate,
-            RequestStatus:"Pending"
+            RequestStatus: "Pending"
         };
         console.log(request);
         fetch('http://localhost:4000/requests', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(request)
         })
@@ -67,13 +67,19 @@ const RequestForAsset = () => {
             .then(() => {
                 Swal.fire({
                     title: 'Success!',
-                    text: 'Your Request Has been Placed!!!',
+                    text: 'Your request has been placed!',
                     icon: 'success',
                     confirmButtonText: 'Close'
                 });
             })
             .catch(error => {
-                console.log(error.message);
+                console.error('Error:', error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Failed to place the request.',
+                    icon: 'error',
+                    confirmButtonText: 'Close'
+                });
             });
     };
 
@@ -149,29 +155,50 @@ const RequestForAsset = () => {
                 <div>
                     <input type="checkbox" id="my_modal_6" className="modal-toggle" />
                     <div className="modal" role="dialog">
-                        <form onSubmit={handleRequest} className="modal-box ">
+                        <form onSubmit={handleRequest} className="modal-box">
                             <div className="">
                                 <label className="form-control w-full my-4">
                                     <div className="label">
                                         <span className="label-text text-xl font-semibold">Product Id</span>
                                     </div>
-                                    <input type="text" placeholder="Service Id" name="id" defaultValue={selectedAsset._id} readOnly className="input input-bordered w-full " />
+                                    <input
+                                        type="text"
+                                        placeholder="Product Id"
+                                        name="id"
+                                        defaultValue={selectedAsset._id}
+                                        readOnly
+                                        className="input input-bordered w-full"
+                                    />
                                 </label>
-                                <label className="form-control w-full ">
+                                <label className="form-control w-full">
                                     <div className="label">
                                         <span className="label-text text-xl font-semibold">Product Name</span>
                                     </div>
-                                    <input type="text" placeholder="Service Name" name="name" defaultValue={selectedAsset.productName} readOnly className="input input-bordered w-full " />
+                                    <input
+                                        type="text"
+                                        placeholder="Product Name"
+                                        name="name"
+                                        defaultValue={selectedAsset.productName}
+                                        readOnly
+                                        className="input input-bordered w-full"
+                                    />
                                 </label>
                                 <label className="form-control w-full my-4">
                                     <div className="label">
                                         <span className="label-text text-xl font-semibold">Product Type</span>
                                     </div>
-                                    <input type="text" placeholder="Service Type" name="type" defaultValue={selectedAsset.productType} readOnly className="input input-bordered w-full " />
+                                    <input
+                                        type="text"
+                                        placeholder="Product Type"
+                                        name="type"
+                                        defaultValue={selectedAsset.productType}
+                                        readOnly
+                                        className="input input-bordered w-full"
+                                    />
                                 </label>
                             </div>
                             <div className="flex gap-6 mt-4">
-                                <label className="form-control w-full ">
+                                <label className="form-control w-full">
                                     <div className="label">
                                         <span className="label-text text-xl font-semibold">Additional Notes</span>
                                     </div>
@@ -184,7 +211,11 @@ const RequestForAsset = () => {
                                     />
                                 </label>
                             </div>
-                            <input type="submit" value="Request Asset" className="btn bg-red-100 w-full mt-6 text-xl font-semibold" />
+                            <input
+                                type="submit"
+                                value="Request Asset"
+                                className="btn bg-red-100 w-full mt-6 text-xl font-semibold"
+                            />
                             <div className="modal-action justify-center">
                                 <label htmlFor="my_modal_6" className="btn mt-6">Exit</label>
                             </div>
