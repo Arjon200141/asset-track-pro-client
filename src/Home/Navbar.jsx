@@ -12,14 +12,14 @@ const Navbar = () => {
         <Link to='/hrjoin'><li><a>Join as HR Manager</a></li></Link>
     </>
     const navlinksemployees = <>
-        <Link to="/employeehome"><li><a>Home</a></li></Link> 
+        <Link to="/"><li><a>Home</a></li></Link> 
         <Link to="/myassets"><li><a> My Assets</a></li></Link>
         <li><a>My Team</a></li>
         <Link to="/request"><li><a>Request for an Asset</a></li></Link>
         <Link to='/eployeeprofile'><li><a>Profile</a></li></Link>
     </>
     const navlinkshr = <>
-        <Link to="/"> <li><a>Home</a></li></Link>
+        <Link to="/hrhome"> <li><a>Home</a></li></Link>
         <Link to="/assetlist"><li><a>Asset List</a></li></Link>
         <Link to="/addasset"><li><a>Add an Asset</a></li></Link>
         <Link to="/allrequest"><li><a>All Requests</a></li></Link>

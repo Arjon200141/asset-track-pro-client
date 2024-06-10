@@ -15,6 +15,7 @@ import AllRequest from "../HRPages/AllRequest";
 import EmployeeList from "../HRPages/EmployeeList";
 import AddEmployee from "../HRPages/AddEmployee";
 import EmployeeHome from "../EmployeeHome/EmployeeHome";
+import HRHome from "../HRHome/HRHome";
 
 
 const router = createBrowserRouter([
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
       {
         path:"/employeehome",
         element:<EmployeeHome></EmployeeHome>
+      },
+      {
+        path:"/hrhome",
+        element:<HRHome></HRHome>
       }
     ]
   }
