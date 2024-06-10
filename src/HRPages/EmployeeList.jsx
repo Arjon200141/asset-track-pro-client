@@ -11,7 +11,7 @@ const EmployeeList = () => {
 
     const fetchEmployees = async () => {
         try {
-            const response = await fetch('http://localhost:4000/usersemp?role=employee'); // Update the URL to match the backend route
+            const response = await fetch('http://localhost:4000/usersemp?role=employee');
             if (response.ok) {
                 const data = await response.json();
                 setEmployees(data);

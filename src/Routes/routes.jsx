@@ -1,6 +1,6 @@
 import {
-    createBrowserRouter,
-  } from "react-router-dom";
+  createBrowserRouter,
+} from "react-router-dom";
 import Root from "../Root/Root";
 import Home from "../Home/Home";
 import JoinEmployee from "../Pages/JoinEmployee";
@@ -16,66 +16,65 @@ import EmployeeList from "../HRPages/EmployeeList";
 import AddEmployee from "../HRPages/AddEmployee";
 
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root></Root>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>
+      },
+      {
+        path: "/employeejoin",
+        element: <JoinEmployee></JoinEmployee>,
+      },
+      {
+        path: "/hrjoin",
+        element: <JoinHR></JoinHR>
+      },
+      {
+        path: "/login",
+        element: <LogIn></LogIn>
+      },
+      {
+        path: "/eployeeprofile",
+        element: <Profile></Profile>
+      },
+      {
+        path: "/assetlist",
+        element: <AssetList></AssetList>,
+        loader: () => fetch('http://localhost:4000/assets')
+      },
+      {
+        path: "/addasset",
+        element: <AddAssetList></AddAssetList>
+      },
+      {
+        path: "/request",
+        element: <RequestForAsset></RequestForAsset>,
+        loader: () => fetch('http://localhost:4000/assets')
+      },
+      {
+        path: "/myassets",
+        element: <MyAssets></MyAssets>,
+        loader: () => fetch('http://localhost:4000/requests')
+      },
+      {
+        path: "/allrequest",
+        element: <AllRequest></AllRequest>
+      },
+      {
+        path: "/myemployee",
+        element: <EmployeeList></EmployeeList>
+      },
+      {
+        path: "/addemployee",
+        element: <AddEmployee></AddEmployee>
+      },
+    ]
+  }
 
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Root></Root>,
-      children:[
-        {
-            path:"/",
-            element:<Home></Home>
-        },
-        {
-          path: "/employeejoin",
-          element: <JoinEmployee></JoinEmployee>,
-        },
-        {
-          path:"/hrjoin",
-          element:<JoinHR></JoinHR>
-        },
-        {
-          path:"/login",
-          element:<LogIn></LogIn>
-        },
-        {
-          path:"/eployeeprofile",
-          element:<Profile></Profile>
-        },
-        {
-          path:"/assetlist",
-          element:<AssetList></AssetList>,
-          loader: () => fetch('http://localhost:4000/assets')
-        },
-        {
-          path:"/addasset",
-          element:<AddAssetList></AddAssetList>
-        },
-        {
-          path:"/request",
-          element: <RequestForAsset></RequestForAsset>,
-          loader: () => fetch('http://localhost:4000/assets')
-        },
-        {
-          path:"/myassets",
-          element:<MyAssets></MyAssets>,
-          loader: () => fetch('http://localhost:4000/requests')
-        },
-        {
-          path:"/allrequest",
-          element: <AllRequest></AllRequest>
-        },
-        {
-          path:"/myemployee",
-          element:<EmployeeList></EmployeeList>
-        },
-        {
-          path:"/addemployee",
-          element:<AddEmployee></AddEmployee>
-        }
-      ]
-    }
-    
-  ]);
+]);
 
 export default router;

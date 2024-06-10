@@ -5,7 +5,6 @@ import { AuthContext } from "../Providers/AuthProviders";
 const Navbar = () => {
 
     const { user, userRole, logOut } = useContext(AuthContext);
-    console.log(userRole);
     const [showName, setShowName] = useState(false);
     const navlinks = <>
         <Link to="/"> <li><a>Home</a></li></Link>
@@ -44,7 +43,7 @@ const Navbar = () => {
                         {/* {user?. userRole == 'hr' ? navlinkshr :
                             userRole == 'employee' ? navlinksemployees :
                                 navlinks} */}
-                        {navlinks}
+                        {navlinksemployees}
                     </ul>
                 </div>
                 <a className="btn btn-ghost text-3xl font-bold"><span className="text-red-600">AssetTrack</span> Pro</a>
@@ -54,7 +53,7 @@ const Navbar = () => {
                     {/* {user?. userRole === 'hr' ? navlinkshr :
                         userRole === 'employee' ? navlinksemployees :
                             navlinks} */}
-                    {navlinks}
+                    {navlinksemployees}
                 </ul>
             </div>
             <div className="navbar-end">

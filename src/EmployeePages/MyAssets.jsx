@@ -120,9 +120,9 @@ const MyAssets = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {assets.map((asset,index) => (
+                            {assets.map((asset, index) => (
                                 <tr key={asset._id}>
-                                    <td>{index}</td>
+                                    <td>{index + 1}</td>
                                     <td>{asset.ProductName}</td>
                                     <td>{asset.ProductType}</td>
                                     <td>{new Date(asset.RequestDate).toLocaleDateString()}</td>

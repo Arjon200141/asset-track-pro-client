@@ -105,7 +105,7 @@ const AssetList = () => {
                         <tbody>
                             {filteredData.map((asset, index) => (
                                 <tr key={index}>
-                                    <td>{index+1}</td>
+                                    <td>{index + 1}</td>
                                     <td>{asset.productName}</td>
                                     <td>{asset.productType}</td>
                                     <td>{asset.productQuantity}</td>
@@ -113,7 +113,9 @@ const AssetList = () => {
                                     <td>{asset.assetType}</td>
                                     <td>{asset.dateAdded}</td>
                                     <td className="flex gap-6 mt-4 justify-center">
+
                                         <button>Update</button>
+
                                         <button>Delete</button>
                                     </td>
                                 </tr>
