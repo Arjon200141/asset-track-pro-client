@@ -44,7 +44,7 @@ const Navbar = () => {
                         {/* {user?. userRole == 'hr' ? navlinkshr :
                             userRole == 'employee' ? navlinksemployees :
                                 navlinks} */}
-                        {navlinksemployees}
+                        {navlinks}
                     </ul>
                 </div>
                 <a className="btn btn-ghost text-3xl font-bold"><span className="text-red-600">AssetTrack</span> Pro</a>
@@ -54,7 +54,7 @@ const Navbar = () => {
                     {/* {user?. userRole === 'hr' ? navlinkshr :
                         userRole === 'employee' ? navlinksemployees :
                             navlinks} */}
-                    {navlinksemployees}
+                    {navlinks}
                 </ul>
             </div>
             <div className="navbar-end">
