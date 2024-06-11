@@ -11,10 +11,12 @@ const EmployeeList = () => {
 
     const fetchEmployees = async () => {
         try {
-            const response = await fetch('http://localhost:4000/usersemp?role=employee');
+            const response = await fetch('http://localhost:4000/users?role=employee');
             if (response.ok) {
                 const data = await response.json();
-                setEmployees(data);
+                // Filter users whose role is 'employee'
+                const employees = data.filter(user => user.role === 'employee');
+                setEmployees(employees);
             } else {
                 console.error('Failed to fetch employees');
             }
@@ -29,7 +31,7 @@ const EmployeeList = () => {
                 method: 'DELETE'
             });
             if (response.ok) {
-                fetchEmployees();
+                fetchEmployees(); // Re-fetch the employees after deleting
                 Swal.fire({
                     title: 'Success!',
                     text: 'Employee removed from the team.',
@@ -50,11 +52,11 @@ const EmployeeList = () => {
             <div className="p-4 bg-fuchsia-50 pl-40">
                 <h2 className="text-4xl font-semibold text-center">Employee List</h2>
                 <div className="overflow-x-auto mx-12">
-                    <h2 className='text-2xl font-semibold text-center my-8'>Total Members : {employees.length}</h2>
+                    <h2 className='text-2xl font-semibold text-center my-8'>Total Members: {employees.length}</h2>
                     <table className="table table-lg">
                         <thead>
                             <tr className="text-xl">
-                                <th>Image</th>
+                                <th>Email</th>
                                 <th>Name</th>
                                 <th>Remove From Team</th>
                             </tr>
@@ -62,12 +64,12 @@ const EmployeeList = () => {
                         <tbody>
                             {employees.map((employee, index) => (
                                 <tr key={index}>
-                                    <td>{employee.user.email}</td>
+                                    <td>{employee.email}</td>
                                     <td>{employee.user.displayName}</td>
                                     <td>
                                         <button
                                             className="btn bg-red-200"
-                                            onClick={() => removeEmployee(employee.userId)}
+                                            onClick={() => removeEmployee(employee._id)}
                                         >
                                             Remove
                                         </button>

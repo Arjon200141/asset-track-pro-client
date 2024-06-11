@@ -52,7 +52,7 @@ const AssetList = () => {
                                 text: "Your file has been deleted.",
                                 icon: "success"
                             });
-                            fetchAssets(); // Refetch assets after delete
+                            fetchAssets();
                         }
                     })
                     .catch(err => {

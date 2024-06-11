@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../Providers/AuthProviders";
 import Swal from "sweetalert2";
 
-const Profile = () => {
+const HRProfile = _id => {
     const { user } = useContext(AuthContext);
 
     const [newUser, setNewUser] = useState(user?.displayName || "");
@@ -11,9 +11,11 @@ const Profile = () => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
+        
+        // Ensure the new user is formatted correctly
         const updatedUser = { displayName: name };
         
-        fetch(`http://localhost:4000/users/${user._id}`, {
+        fetch(`http://localhost:4000/users/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -83,4 +85,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default HRProfile;
