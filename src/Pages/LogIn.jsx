@@ -1,49 +1,53 @@
-import { useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProviders";
 import Swal from "sweetalert2";
 import SocialLogin from "./SocialLogin";
+import axiosInstance from "../Providers/AxiosInstance/axiosinstance";
 
 const LogIn = () => {
-
     const [users, setUsers] = useState([]);
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || "/";
 
-    const { signIn, setUserRole ,userRole } = useContext(AuthContext);
+    const { signIn, setUserRole, userRole } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch('http://localhost:5000/users')
-            .then(res => res.json())
-            .then(data => setUsers(data))
-    }, [])
-    const handleLogIn = e => {
+        axiosInstance.get('/users')
+            .then(res => setUsers(res.data));
+    }, []);
+
+    const handleLogIn = async (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
-        signIn(email, password)
-            .then(result => {
-                const user = result.user;
-                console.log(user);
-                Swal.fire({
-                    title: "Logged In !",
-                    text: "You have Logged In Successfully!!!",
-                    icon: "success"
-                });
-                navigate('/');
+        try {
+            const result = await signIn(email, password);
+            const user = result.user;
+            console.log(user);
+            Swal.fire({
+                title: "Logged In !",
+                text: "You have Logged In Successfully!!!",
+                icon: "success"
+            });
 
-                const match = users.find(item => item.userId == user.uid)
-                setUserRole(match.role);
-                console.log(userRole);
-                
+            const match = users.find(item => item.userId === user.uid);
+            setUserRole(match.role);
+            console.log(userRole);
 
-                navigate(from, { replace: true });
-            })
-    }
-
+            navigate(from, { replace: true });
+        } catch (error) {
+            console.error("Login failed", error);
+            Swal.fire({
+                title: "Login Failed",
+                text: "Invalid email or password",
+                icon: "error"
+            });
+        }
+    };
 
     return (
         <div className="hero-content py-12 bg-fuchsia-50">

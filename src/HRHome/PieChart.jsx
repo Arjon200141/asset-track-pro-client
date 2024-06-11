@@ -1,68 +1,50 @@
-// import { useEffect, useState, useContext } from "react";
-// import { AuthContext } from "../Providers/AuthProviders";
-// import { Pie } from "react-chartjs-2";
-// import { Chart } from "chart.js";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Pie } from 'react-chartjs-2';
 
-// const PieChart = () => {
-//     const { user } = useContext(AuthContext);
-//     const [returnableCount, setReturnableCount] = useState(0);
-//     const [nonReturnableCount, setNonReturnableCount] = useState(0);
+const PieChart = () => {
+    const [data, setData] = useState(null);
 
-//     useEffect(() => {
-//         let chartInstance = null;
-        
-//         const fetchAssetData = async () => {
-//             try {
-//                 const response = await fetch(`http://localhost:4000/requests?email=${user.email}`);
-//                 const data = await response.json();
-//                 const returnableAssets = data.filter(asset => asset.productType === "Returnable");
-//                 const nonReturnableAssets = data.filter(asset => asset.productType === "Non-returnable");
-//                 setReturnableCount(returnableAssets.length);
-//                 setNonReturnableCount(nonReturnableAssets.length);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:4000/requests');
+                const requests = response.data;
+                const returnableCount = requests.filter(item => item.productType === 'Returnable').length;
+                const nonReturnableCount = requests.filter(item => item.productType === 'Non-returnable').length;
                 
-//                 if (chartInstance) {
-//                     chartInstance.destroy();
-//                 }
+                setData({
+                    labels: ['Returnable', 'Non-returnable'],
+                    datasets: [
+                        {
+                            label: 'Returnable vs Non-returnable Items',
+                            data: [returnableCount, nonReturnableCount],
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.6)',
+                                'rgba(255, 99, 132, 0.6)',
+                            ],
+                            borderWidth: 1,
+                        },
+                    ],
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
 
-//                 const ctx = document.getElementById("pie-chart");
-//                 chartInstance = new Chart(ctx, {
-//                     type: "pie",
-//                     data: {
-//                         labels: ["Returnable", "Non-returnable"],
-//                         datasets: [{
-//                             data: [returnableCount, nonReturnableCount],
-//                             backgroundColor: [
-//                                 'rgba(54, 162, 235, 0.6)', 
-//                                 'rgba(255, 99, 132, 0.6)', 
-//                             ],
-//                             borderWidth: 1,
-//                         }],
-//                     },
-//                 });
-//             } catch (error) {
-//                 console.error('Error fetching asset data:', error);
-//             }
-//         };
+        fetchData();
+    }, []);
 
-//         fetchAssetData();
+    return (
+        <div>
+            <h2>Total Percentage of Returnable and Non-returnable Items Requested by the Employee</h2>
+            {data ? (
+                <Pie data={data} />
+            ) : (
+                <p>Loading...</p>
+            )}
+        </div>
+    );
+};
 
-//         return () => {
-//             if (chartInstance) {
-//                 chartInstance.destroy();
-//             }
-//         };
-//     }, [user, returnableCount, nonReturnableCount]);
-
-//     return (
-//         <div>
-//             <div className="p-4 bg-fuchsia-50 pl-40">
-//                 <h2 className="text-4xl font-semibold text-center">Asset Pie Chart</h2>
-//                 <div className="flex justify-center mt-6">
-//                     <canvas id="pie-chart" width="400" height="400"></canvas>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default PieChart;
+export default PieChart;

@@ -68,7 +68,7 @@ const AllRequest = () => {
     return (
         <div>
             <Navbar />
-            <div className="p-4 bg-fuchsia-50 ">
+            <div className="p-4 bg-lime-50 ">
                 <h2 className="text-4xl font-semibold text-center my-6">All Requests</h2>
                 <div className="overflow-x-auto ">
                     <table className="table table-md">

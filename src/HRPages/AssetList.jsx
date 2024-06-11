@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Navbar from "../Home/Navbar";
 import useAxiosPublic from "../Axios/useAxiosPublic";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const AssetList = () => {
     const [assets, setAssets] = useState([]);
@@ -149,7 +150,10 @@ const AssetList = () => {
                                     <td>{asset.assetType}</td>
                                     <td>{asset.dateAdded}</td>
                                     <td className="flex gap-6 mt-4 justify-center">
-                                        <button>Update</button>
+
+                                        <Link to={`/updateasset/${asset._id}`}>
+                                            <button>Update</button>
+                                        </Link>
                                         <button onClick={() => handleDelete(asset._id)}>Delete</button>
                                     </td>
                                 </tr>

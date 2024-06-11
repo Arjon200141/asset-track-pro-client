@@ -14,7 +14,6 @@ const TopReq= () => {
             const requests = await response.json();
             const pendingRequests = requests.filter(request => request.RequestStatus === "Pending");
 
-            // Count the number of requests for each product
             const requestCounts = {};
             pendingRequests.forEach(request => {
                 if (requestCounts[request.ProductId]) {
@@ -24,10 +23,9 @@ const TopReq= () => {
                 }
             });
 
-            // Sort products based on request count
             const sortedItems = Object.entries(requestCounts)
-                .sort((a, b) => b[1] - a[1]) // Sort by count in descending order
-                .slice(0, 4) // Get top 4 items
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 4)
                 .map(([productId, count]) => {
                     const matchingRequest = pendingRequests.find(request => request.ProductId === productId);
                     return {
@@ -51,13 +49,14 @@ const TopReq= () => {
     };
 
     return (
-        <div>
-            <div className="p-4 bg-fuchsia-50 pl-40">
-                <h2 className="text-4xl font-semibold text-center">Top Most Requested Items</h2>
+        <div className="bg-teal-50">
+            <div className="m-12 py-12 pl-44">
+                <h2 className="text-4xl font-semibold text-center my-8">Top Most Requested Items</h2>
                 <div className="overflow-x-auto mx-12 mt-6">
                     <table className="table table-lg">
                         <thead>
                             <tr className="text-xl">
+                                <th>Serial No</th>
                                 <th>Product Name</th>
                                 <th>Product Type</th>
                                 <th>Request Count</th>
@@ -66,6 +65,7 @@ const TopReq= () => {
                         <tbody>
                             {topItems.map((item, index) => (
                                 <tr key={index}>
+                                    <td>{index+1}</td>
                                     <td>{item.productName}</td>
                                     <td>{item.productType}</td>
                                     <td>{item.requestCount}</td>

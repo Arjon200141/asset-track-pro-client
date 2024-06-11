@@ -16,6 +16,7 @@ import EmployeeList from "../HRPages/EmployeeList";
 import AddEmployee from "../HRPages/AddEmployee";
 import EmployeeHome from "../EmployeeHome/EmployeeHome";
 import HRHome from "../HRHome/HRHome";
+import UpdateAsset from "../HRPages/UpdateAsset";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,11 @@ const router = createBrowserRouter([
         path: "/employeehome",
         element: <EmployeeHome></EmployeeHome>
       },
+      {
+        path: "/updateasset/:id",
+        element:<UpdateAsset></UpdateAsset>,
+        loader: ({ params }) => fetch(`http://localhost:4000/updateasset/${params.id}`)
+      }
       // {
       //   path: "/hrhome",
       //   element: <HRHome></HRHome>

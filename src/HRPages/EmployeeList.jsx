@@ -55,24 +55,22 @@ const EmployeeList = () => {
                     <h2 className='text-2xl font-semibold text-center my-8'>Total Members: {employees.length}</h2>
                     <table className="table table-lg">
                         <thead>
-                            <tr className="text-xl">
+                            <tr className="text-2xl">
                                 <th>Email</th>
                                 <th>Name</th>
                                 <th>Remove From Team</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className='text-xl'>
                             {employees.map((employee, index) => (
-                                <tr key={index}>
+                                <tr  key={index}>
                                     <td>{employee.email}</td>
                                     <td>{employee.user.displayName}</td>
-                                    <td>
+                                    <td className='flex justify-center'>
                                         <button
-                                            className="btn bg-red-200"
+                                            className="btn bg-red-200 text-xl font-semibold"
                                             onClick={() => removeEmployee(employee._id)}
-                                        >
-                                            Remove
-                                        </button>
+                                        > Remove</button>
                                     </td>
                                 </tr>
                             ))}

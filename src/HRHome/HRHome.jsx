@@ -1,6 +1,7 @@
 import Navbar from "../Home/Navbar";
 import HRPendingReq from "./HRPendingReq";
 import Limited from "./Limited";
+// import PieChart from "./PieChart";
 import TopReq from "./TopReq";
 
 const HRHome = () => {

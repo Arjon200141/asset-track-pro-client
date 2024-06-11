@@ -1,45 +1,40 @@
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, signOut, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 
-
 export const AuthContext = createContext(null);
-const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
 const AuthProviders = ({ children }) => {
-
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [userRole , setUserRole] = useState('');
+    const [userRole, setUserRole] = useState('');
 
-    const createUser = (email, password) => {
+    const signIn = async (email, password) => {
         setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password);
-    }
+        const result = await signInWithEmailAndPassword(auth, email, password);
+        const token = await result.user.getIdToken();
+        localStorage.setItem('token', token);
+        setLoading(false);
+        return result;
+    };
 
-    const signIn = (email, password) => {
+    const signInWithGoogle = async () => {
         setLoading(true);
-        return signInWithEmailAndPassword(auth, email, password);
-    }
+        const result = await signInWithPopup(auth, googleProvider);
+        const token = await result.user.getIdToken();
+        localStorage.setItem('token', token);
+        setLoading(false);
+        return result;
+    };
 
-    const signInWithGoogle = () => {
+    const logOut = async () => {
         setLoading(true);
-        return signInWithPopup(auth, googleProvider);
-    }
-
-    const logOut = () => {
-        setLoading(true);
-        setUserRole('');
-        return signOut(auth);
-    }
-
-    const updateUserProfile = (name, photo) => {
-        return updateProfile(auth.currentUser, {
-            displayName: name,
-            photoURL: photo
-        });
-    }
+        localStorage.removeItem('token');
+        await signOut(auth);
+        setLoading(false);
+    };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
@@ -53,10 +48,8 @@ const AuthProviders = ({ children }) => {
 
     const authInfo = {
         user,
-        createUser,
         signIn,
         loading,
-        updateUserProfile,
         logOut,
         signInWithGoogle,
         setUserRole,
