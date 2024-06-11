@@ -3,30 +3,38 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProviders";
 
 const Navbar = () => {
-
     const { user, userRole, logOut } = useContext(AuthContext);
     const [showName, setShowName] = useState(false);
-    const navlinks = <>
-        <Link to="/"> <li><a>Home</a></li></Link>
-        <Link to='/employeejoin'><li><a>Join as Employee</a></li></Link>
-        <Link to='/hrjoin'><li><a>Join as HR Manager</a></li></Link>
-    </>
-    const navlinksemployees = <>
-        <Link to="/"><li><a>Home</a></li></Link> 
-        <Link to="/myassets"><li><a> My Assets</a></li></Link>
-        <li><a>My Team</a></li>
-        <Link to="/request"><li><a>Request for an Asset</a></li></Link>
-        <Link to='/eployeeprofile'><li><a>Profile</a></li></Link>
-    </>
-    const navlinkshr = <>
-        <Link to="/hrhome"> <li><a>Home</a></li></Link>
-        <Link to="/assetlist"><li><a>Asset List</a></li></Link>
-        <Link to="/addasset"><li><a>Add an Asset</a></li></Link>
-        <Link to="/allrequest"><li><a>All Requests</a></li></Link>
-        <Link to="/myemployee"><li><a>My Employee List</a></li></Link>
-        <Link to="/addemployee"><li><a>Add an Employee</a></li></Link>
-        <li><a>Profile</a></li>
-    </>
+
+    const navlinks = (
+        <>
+            <li><Link to="">Home</Link></li>
+            <li><Link to="/employeejoin">Join as Employee</Link></li>
+            <li><Link to="/hrjoin">Join as HR Manager</Link></li>
+        </>
+    );
+
+    const navlinksemployees = (
+        <>
+            <li><Link to="">Home</Link></li>
+            <li><Link to="/myassets">My Assets</Link></li>
+            <li><a>My Team</a></li>
+            <li><Link to="/request">Request for an Asset</Link></li>
+            <li><Link to="/eployeeprofile">Profile</Link></li>
+        </>
+    );
+
+    const navlinkshr = (
+        <>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/assetlist">Asset List</Link></li>
+            <li><Link to="/addasset">Add an Asset</Link></li>
+            <li><Link to="/allrequest">All Requests</Link></li>
+            <li><Link to="/myemployee">My Employee List</Link></li>
+            <li><Link to="/addemployee">Add an Employee</Link></li>
+            <li><a>Profile</a></li>
+        </>
+    );
 
     const handleLogOut = () => {
         logOut();
@@ -35,48 +43,36 @@ const Navbar = () => {
     return (
         <div className="navbar bg-sky-50">
             <div className="navbar-start">
-                <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-                    </div>
-                    <ul tabIndex={0} className="text-xl font-medium menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                        {/* {user?. userRole == 'hr' ? navlinkshr :
-                            userRole == 'employee' ? navlinksemployees :
-                                navlinks} */}
-                        {navlinksemployees}
-                    </ul>
-                </div>
+                <ul className="text-xl font-medium menu hidden menu-sm mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    {navlinkshr}
+                </ul>
                 <a className="btn btn-ghost text-3xl font-bold"><span className="text-red-600">AssetTrack</span> Pro</a>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="ml-20 gap-2 text-lg font-medium menu menu-horizontal px-1">
-                    {/* {user?. userRole === 'hr' ? navlinkshr :
-                        userRole === 'employee' ? navlinksemployees :
-                            navlinks} */}
-                    {navlinksemployees}
+                <ul className="ml-20 gap-2 text-lg font-medium  menu menu-horizontal px-1">
+                    {navlinkshr}
                 </ul>
             </div>
             <div className="navbar-end">
-                {
-                    user ?
-                        <div className="flex items-center gap-3">
-                            <div
-                                tabIndex={0}
-                                role="button"
-                                className="btn btn-ghost btn-circle avatar"
-                                onMouseEnter={() => setShowName(true)}
-                                onMouseLeave={() => setShowName(false)}
-                            >
-                                <div className="rounded-full">
-                                    <img alt="Profile" src={user.photoURL || "https://i.ibb.co/dDx1cfY/user.png"} />
-                                </div>
-                                {showName && <div className="absolute top-2 right-14 bg-emerald-100 shadow-md p-2 rounded-lg font-medium">{user.displayName || "Name not Found"}</div>}
+                {user ? (
+                    <div className="flex items-center gap-3">
+                        <div
+                            tabIndex={0}
+                            role="button"
+                            className="btn btn-ghost btn-circle avatar"
+                            onMouseEnter={() => setShowName(true)}
+                            onMouseLeave={() => setShowName(false)}
+                        >
+                            <div className="rounded-full">
+                                <img alt="Profile" src={user.photoURL || "https://i.ibb.co/dDx1cfY/user.png"} />
                             </div>
-
-                            <Link onClick={handleLogOut} className="text-xl font-medium "><a>Log Out</a></Link>
-                        </div> :
-                        <Link to='/login' className="text-xl font-medium"><a>Log In</a></Link>
-                }
+                            {showName && <div className="absolute top-2 right-14 bg-emerald-100 shadow-md p-2 rounded-lg font-medium">{user.displayName || "Name not Found"}</div>}
+                        </div>
+                        <Link onClick={handleLogOut} className="text-xl font-medium"><a>Log Out</a></Link>
+                    </div>
+                ) : (
+                    <Link to='/login' className="text-xl font-medium"><a>Log In</a></Link>
+                )}
             </div>
         </div>
     );

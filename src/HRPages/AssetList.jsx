@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "../Home/Navbar";
 import useAxiosPublic from "../Axios/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const AssetList = () => {
     const [assets, setAssets] = useState([]);
@@ -10,15 +11,16 @@ const AssetList = () => {
     const [sortOption, setSortOption] = useState("");
     const axiosPublic = useAxiosPublic();
 
+    const fetchAssets = async () => {
+        try {
+            const response = await axiosPublic.get("/assets");
+            setAssets(response.data);
+        } catch (error) {
+            console.error("Error fetching assets", error);
+        }
+    };
+
     useEffect(() => {
-        const fetchAssets = async () => {
-            try {
-                const response = await axiosPublic.get("/assets");
-                setAssets(response.data);
-            } catch (error) {
-                console.error("Error fetching assets", error);
-            }
-        };
         fetchAssets();
     }, [axiosPublic]);
 
@@ -29,6 +31,40 @@ const AssetList = () => {
 
     const handleAssetAdded = (newAsset) => {
         setAssets([...assets, newAsset]);
+    };
+
+    const handleDelete = _id => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosPublic.delete(`http://localhost:4000/assets/${_id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                            fetchAssets(); // Refetch assets after delete
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        Swal.fire({
+                            title: "Error!",
+                            text: "There was an error deleting the asset.",
+                            icon: "error"
+                        });
+                    });
+            }
+        });
     };
 
     const filteredData = assets.filter((asset) =>
@@ -113,10 +149,8 @@ const AssetList = () => {
                                     <td>{asset.assetType}</td>
                                     <td>{asset.dateAdded}</td>
                                     <td className="flex gap-6 mt-4 justify-center">
-
                                         <button>Update</button>
-
-                                        <button>Delete</button>
+                                        <button onClick={() => handleDelete(asset._id)}>Delete</button>
                                     </td>
                                 </tr>
                             ))}
