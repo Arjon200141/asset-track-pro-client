@@ -1,4 +1,4 @@
-import Navbar from "../Home/Navbar";
+
 import { useContext, useState } from "react";
 import { AuthContext } from "../Providers/AuthProviders";
 import Swal from "sweetalert2";
@@ -75,7 +75,6 @@ const MyAssets = () => {
 
     return (
         <div>
-            <Navbar />
             <div className="bg-sky-100 py-12">
                 <div className="flex flex-col justify-center md:flex-row gap-4 my-10">
                     <input
@@ -107,9 +106,9 @@ const MyAssets = () => {
                 </div>
 
                 <div className="overflow-x-auto mx-12">
-                    <table className="table table-lg">
+                    <table className="table table-md">
                         <thead>
-                            <tr className="text-xl">
+                            <tr className="text-lg">
                                 <th></th>
                                 <th>Asset Name</th>
                                 <th>Asset Type</th>

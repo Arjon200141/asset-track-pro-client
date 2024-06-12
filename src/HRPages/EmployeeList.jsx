@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Navbar from '../Home/Navbar';
 import Swal from 'sweetalert2';
 
 const EmployeeList = () => {
@@ -11,10 +10,9 @@ const EmployeeList = () => {
 
     const fetchEmployees = async () => {
         try {
-            const response = await fetch('http://localhost:4000/users?role=employee');
+            const response = await fetch('https://assettrack-pro-server.vercel.app/users?role=employee');
             if (response.ok) {
                 const data = await response.json();
-                // Filter users whose role is 'employee'
                 const employees = data.filter(user => user.role === 'employee');
                 setEmployees(employees);
             } else {
@@ -27,11 +25,11 @@ const EmployeeList = () => {
 
     const removeEmployee = async (userId) => {
         try {
-            const response = await fetch(`http://localhost:4000/users/${userId}`, {
+            const response = await fetch(`https://assettrack-pro-server.vercel.app/users/${userId}`, {
                 method: 'DELETE'
             });
             if (response.ok) {
-                fetchEmployees(); // Re-fetch the employees after deleting
+                fetchEmployees(); 
                 Swal.fire({
                     title: 'Success!',
                     text: 'Employee removed from the team.',
@@ -48,8 +46,7 @@ const EmployeeList = () => {
 
     return (
         <div>
-            <Navbar />
-            <div className="p-4 bg-fuchsia-50 pl-40">
+            <div className="p-4 bg-fuchsia-50 pl-12">
                 <h2 className="text-4xl font-semibold text-center">Employee List</h2>
                 <div className="overflow-x-auto mx-12">
                     <h2 className='text-2xl font-semibold text-center my-8'>Total Members: {employees.length}</h2>

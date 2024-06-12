@@ -11,7 +11,7 @@ const MonthlyReq = () => {
 
     const fetchMonthlyRequests = async () => {
         try {
-            const response = await fetch(`http://localhost:4000/requests?email=${user.email}`);
+            const response = await fetch(`https://assettrack-pro-server.vercel.app/requests?email=${user.email}`);
             const data = await response.json();
             const currentMonth = new Date().getMonth(); 
             const currentYear = new Date().getFullYear(); 
@@ -28,8 +28,8 @@ const MonthlyReq = () => {
     };
 
     return (
-        <div>
-            <h2 className="text-4xl font-semibold text-center mb-6">Monthly Requests</h2>
+        <div className="bg-orange-50 py-12">
+            <h2 className="text-4xl font-semibold text-center my-6">Monthly Requests</h2>
             <div className="overflow-x-auto mx-56">
                 <table className="table table-lg">
                     <thead>

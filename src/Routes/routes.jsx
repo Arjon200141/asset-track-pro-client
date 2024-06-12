@@ -2,7 +2,6 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 import Root from "../Root/Root";
-import Home from "../Home/Home";
 import JoinEmployee from "../Pages/JoinEmployee";
 import JoinHR from "../Pages/JoinHR";
 import LogIn from "../Pages/LogIn";
@@ -17,6 +16,12 @@ import AddEmployee from "../HRPages/AddEmployee";
 import EmployeeHome from "../EmployeeHome/EmployeeHome";
 import HRHome from "../HRHome/HRHome";
 import UpdateAsset from "../HRPages/UpdateAsset";
+import BuyPackage from "../Payment/BuyPackage";
+import Payment from "../Payment/Payment";
+import HRDashBoard from "../HRDashBoard/HRDashBoard";
+import Home from "../Home/Home";
+import EmployeeDashBoard from "../EmployeeNavbar/EmployeeNavbar";
+import MyTeam from "../EmployeePages/MyTeam";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +30,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HRHome></HRHome>
+        element: <Home></Home>
       },
       {
         path: "/employeejoin",
@@ -39,54 +44,85 @@ const router = createBrowserRouter([
         path: "/login",
         element: <LogIn></LogIn>
       },
+      
       {
-        path: "/eployeeprofile",
-        element: <Profile></Profile>
+        path: "/updateasset/:id",
+        element: <UpdateAsset></UpdateAsset>,
+        loader: ({ params }) => fetch(`https://assettrack-pro-server.vercel.app/updateasset/${params.id}`)
       },
       {
-        path: "/assetlist",
+        path: "/buy-package",
+        element: <BuyPackage></BuyPackage>,
+        loader: () => fetch('https://assettrack-pro-server.vercel.app/package-info')
+      },
+      {
+        path: "/payment/:id",
+        element: <Payment></Payment>
+      },
+    ]
+  },
+  {
+    path: "dashboard",
+    element: <HRDashBoard></HRDashBoard>,
+    children: [
+      {
+        path: "hrhome",
+        element: <HRHome></HRHome>
+      },
+      {
+        path: "assetlist",
         element: <AssetList></AssetList>,
-        loader: () => fetch('http://localhost:4000/assets')
+        loader: () => fetch('https://assettrack-pro-server.vercel.app/assets')
       },
       {
-        path: "/addasset",
+        path: "addasset",
         element: <AddAssetList></AddAssetList>
       },
       {
-        path: "/request",
-        element: <RequestForAsset></RequestForAsset>,
-        loader: () => fetch('http://localhost:4000/assets')
-      },
-      {
-        path: "/myassets",
-        element: <MyAssets></MyAssets>,
-        loader: () => fetch('http://localhost:4000/requests')
-      },
-      {
-        path: "/allrequest",
+        path: "allrequest",
         element: <AllRequest></AllRequest>
       },
+
       {
-        path: "/myemployee",
-        element: <EmployeeList></EmployeeList>
-      },
-      {
-        path: "/addemployee",
+        path: "addemployee",
         element: <AddEmployee></AddEmployee>
       },
       {
-        path: "/employeehome",
+        path: "profile",
+        element: <Profile></Profile>
+      },
+      {
+        path: "myemployee",
+        element: <EmployeeList></EmployeeList>
+      },
+    ]
+  },
+  {
+    path: "employeedashboard",
+    element: <EmployeeDashBoard></EmployeeDashBoard>,
+    children: [
+      {
+        path: "emphome",
         element: <EmployeeHome></EmployeeHome>
       },
       {
-        path: "/updateasset/:id",
-        element:<UpdateAsset></UpdateAsset>,
-        loader: ({ params }) => fetch(`http://localhost:4000/updateasset/${params.id}`)
+        path: "myassets",
+        element: <MyAssets></MyAssets>,
+        loader: () => fetch('https://assettrack-pro-server.vercel.app/requests')
+      },
+      {
+        path: "request",
+        element: <RequestForAsset></RequestForAsset>,
+        loader: () => fetch('https://assettrack-pro-server.vercel.app/assets')
+      },
+      {
+        path: "eployeeprofile",
+        element: <Profile></Profile>
+      },
+      {
+        path:"myteam",
+        element:<MyTeam></MyTeam>
       }
-      // {
-      //   path: "/hrhome",
-      //   element: <HRHome></HRHome>
-      // }
     ]
   }
 ]);

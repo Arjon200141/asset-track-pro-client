@@ -1,3 +1,4 @@
+
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -17,15 +18,15 @@ const JoinEmployee = () => {
             const result = await createUser(data.email, data.password);
             const loggedUser = result.user;
 
-            await updateUserProfile(data.name, "");
+            await updateUserProfile(data.name, data.profilePhoto);
             const userInfo = {
                 user: loggedUser,
                 userId: loggedUser.uid,
                 role: 'employee',
                 email: data.email,
                 name: data.name,
-                companyName: "",
-                companyLogo: ""
+                profilePhoto: data.profilePhoto,
+                dateOfBirth: data.date
             };
 
             const res = await axiosPublic.post('/users', userInfo);
@@ -50,10 +51,10 @@ const JoinEmployee = () => {
     };
 
     return (
-        <div className="bg-lime-50">
+        <div className="bg-sky-50">
             <div className="mx-80 py-12">
                 <div className="hero min-h-screen">
-                    <div className="w-full shadow-2xl bg-lime-100 rounded-xl">
+                    <div className="w-full shadow-2xl bg-sky-100 rounded-xl">
                         <h2 className="text-4xl font-semibold text-center mt-8">Register a New Employee</h2>
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                             <div className="form-control">
@@ -62,6 +63,13 @@ const JoinEmployee = () => {
                                 </label>
                                 <input type="text" name="name" {...register("name", { required: true })} placeholder="Employee Name" className="input input-bordered" />
                                 {errors.name && <span className='ml-4 text-lg font-medium text-orange-400'>Name is required</span>}
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Profile Photo</span>
+                                </label>
+                                <input type="text" name="profilePhoto" {...register("profilePhoto", { required: true })} placeholder="Profile Photo URL" className="input input-bordered" />
+                                {errors.profilePhoto && <span className='ml-4 text-lg font-medium text-orange-400'>Profile Photo is required</span>}
                             </div>
                             <div className="form-control">
                                 <label className="label">
@@ -76,6 +84,13 @@ const JoinEmployee = () => {
                                 </label>
                                 <input type="password" name="password" {...register("password", { required: true })} placeholder="Password" className="input input-bordered" />
                                 {errors.password && <span className='ml-4 text-lg font-medium text-orange-400'>Password is required</span>}
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Date of Birth</span>
+                                </label>
+                                <input type="date" name="date" {...register("date", { required: true })} className="input input-bordered" />
+                                {errors.date && <span className='ml-4 text-lg font-medium text-orange-400'>Date of Birth is required</span>}
                             </div>
                             <div className="form-control mt-6">
                                 <button className="btn bg-lime-300 text-2xl font-semibold py-2">Sign Up</button>

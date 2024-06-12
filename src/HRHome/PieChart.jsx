@@ -8,7 +8,7 @@ const PieChart = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/requests');
+                const response = await axios.get('https://assettrack-pro-server.vercel.app/requests');
                 const requests = response.data;
                 const returnableCount = requests.filter(item => item.productType === 'Returnable').length;
                 const nonReturnableCount = requests.filter(item => item.productType === 'Non-returnable').length;

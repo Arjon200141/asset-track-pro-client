@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getAuth, signInWithEmailAndPassword, signInWithPopup, signOut, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, signOut, GoogleAuthProvider, onAuthStateChanged, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 
 export const AuthContext = createContext(null);
@@ -14,8 +14,13 @@ const AuthProviders = ({ children }) => {
     const signIn = async (email, password) => {
         setLoading(true);
         const result = await signInWithEmailAndPassword(auth, email, password);
-        const token = await result.user.getIdToken();
-        localStorage.setItem('token', token);
+        setLoading(false);
+        return result;
+    };
+
+    const createUser = async (email, password) => {
+        setLoading(true);
+        const result = await createUserWithEmailAndPassword(auth, email, password);
         setLoading(false);
         return result;
     };
@@ -23,15 +28,12 @@ const AuthProviders = ({ children }) => {
     const signInWithGoogle = async () => {
         setLoading(true);
         const result = await signInWithPopup(auth, googleProvider);
-        const token = await result.user.getIdToken();
-        localStorage.setItem('token', token);
         setLoading(false);
         return result;
     };
 
     const logOut = async () => {
         setLoading(true);
-        localStorage.removeItem('token');
         await signOut(auth);
         setLoading(false);
     };
@@ -40,11 +42,28 @@ const AuthProviders = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
             setLoading(false);
+            if (currentUser) {
+                const role = currentUser.email === "hr@example.com" ? "hr" : "employee";
+                setUserRole(role);
+            } else {
+                setUserRole(''); 
+            }
         });
         return () => {
             unsubscribe();
         };
     }, []);
+
+    const updateUserProfile = (name, photo) => {
+        if (auth.currentUser) {
+            return updateProfile(auth.currentUser, {
+                displayName: name,
+                photoURL: photo 
+            });
+        } else {
+            return Promise.reject(new Error("No user is currently signed in."));
+        }
+    };
 
     const authInfo = {
         user,
@@ -53,7 +72,9 @@ const AuthProviders = ({ children }) => {
         logOut,
         signInWithGoogle,
         setUserRole,
-        userRole
+        userRole,
+        createUser,
+        updateUserProfile
     };
 
     return (

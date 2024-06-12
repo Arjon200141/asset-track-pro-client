@@ -12,6 +12,5 @@ const firebaseConfig = {
   messagingSenderId: "471784895048",
   appId: "1:471784895048:web:1205ba4f6cc9345e3b9e7d"
 };
-console.log(firebaseConfig);
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);

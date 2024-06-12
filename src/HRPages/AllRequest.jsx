@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Navbar from '../Home/Navbar';
 import Swal from 'sweetalert2';
 
 const AllRequest = () => {
@@ -11,7 +10,7 @@ const AllRequest = () => {
 
     const fetchRequests = async () => {
         try {
-            const response = await fetch('http://localhost:4000/allrequests');
+            const response = await fetch('https://assettrack-pro-server.vercel.app/allrequests');
             if (response.ok) {
                 const data = await response.json();
                 setRequests(data);
@@ -25,7 +24,7 @@ const AllRequest = () => {
 
     const handleApprove = async (id) => {
         try {
-            const response = await fetch(`http://localhost:4000/allrequests/approve/${id}`, {
+            const response = await fetch(`https://assettrack-pro-server.vercel.app/allrequests/approve/${id}`, {
                 method: 'PUT'
             });
             if (response.ok) {
@@ -46,7 +45,7 @@ const AllRequest = () => {
 
     const handleReject = async (id) => {
         try {
-            const response = await fetch(`http://localhost:4000/allrequests/reject/${id}`, {
+            const response = await fetch(`https://assettrack-pro-server.vercel.app/allrequests/reject/${id}`, {
                 method: 'PUT'
             });
             if (response.ok) {
@@ -67,13 +66,12 @@ const AllRequest = () => {
 
     return (
         <div>
-            <Navbar />
-            <div className="p-4 bg-lime-50 ">
+            <div className="p-2 bg-lime-50 ">
                 <h2 className="text-4xl font-semibold text-center my-6">All Requests</h2>
                 <div className="overflow-x-auto ">
-                    <table className="table table-md">
+                    <table className="table table-sm">
                         <thead>
-                            <tr className="text-lg">
+                            <tr className="text-md">
                                 <th>Asset Name</th>
                                 <th>Asset Type</th>
                                 <th>Email of requester</th>

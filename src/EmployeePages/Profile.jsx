@@ -13,7 +13,7 @@ const Profile = () => {
         const name = form.name.value;
         const updatedUser = { displayName: name };
         
-        fetch(`http://localhost:4000/users/${user._id}`, {
+        fetch(`https://assettrack-pro-server.vercel.app/users/${user._id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

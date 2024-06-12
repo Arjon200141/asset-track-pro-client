@@ -9,7 +9,7 @@ const HRPendingReq = () => {
 
     const fetchPendingRequests = async () => {
         try {
-            const response = await fetch("http://localhost:4000/allrequests?status=Pending");
+            const response = await fetch("https://assettrack-pro-server.vercel.app/allrequests?status=Pending");
             const data = await response.json();
             setPendingRequests(data);
         } catch (error) {

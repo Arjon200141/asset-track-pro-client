@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Navbar from "../Home/Navbar";
 import useAxiosPublic from "../Axios/useAxiosPublic";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
@@ -45,7 +44,7 @@ const AssetList = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.delete(`http://localhost:4000/assets/${_id}`)
+                axiosPublic.delete(`https://assettrack-pro-server.vercel.app/assets/${_id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             Swal.fire({
@@ -86,7 +85,6 @@ const AssetList = () => {
 
     return (
         <div>
-            <Navbar />
             <div className="p-4 bg-emerald-50">
                 <h2 className="text-4xl font-semibold text-center">All Assets</h2>
                 <div className="ml-60 flex flex-col md:flex-row gap-4 my-10">
@@ -126,9 +124,9 @@ const AssetList = () => {
                     </select>
                 </div>
                 <div className="overflow-x-auto mx-4">
-                    <table className="table table-lg">
+                    <table className="table md:table-sm">
                         <thead>
-                            <tr className="text-xl">
+                            <tr className="md:text-sm">
                                 <th>Id</th>
                                 <th>Product Name</th>
                                 <th>Product Type</th>

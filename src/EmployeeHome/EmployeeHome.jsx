@@ -1,14 +1,19 @@
-import Navbar from "../Home/Navbar";
+import Calendar from "./Calender";
+import Events from "./Events";
 import MonthlyReq from "./MonthLyReq";
 import MyPending from "./MyPending";
+import Notice from "./Notice";
 
 const EmployeeHome = () => {
     return (
         <div>
-            <Navbar></Navbar>
             <MyPending></MyPending>
             <MonthlyReq></MonthlyReq>
-            
+            <div className="m-8 my-16">
+                <Calendar></Calendar>
+            </div>
+            <Notice></Notice>
+            <Events></Events>
         </div>
     );
 };

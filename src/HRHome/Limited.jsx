@@ -9,7 +9,7 @@ const Limited = () => {
 
     const fetchLimitedStockAssets = async () => {
         try {
-            const response = await fetch("http://localhost:4000/assets");
+            const response = await fetch("https://assettrack-pro-server.vercel.app/assets");
             if (!response.ok) {
                 throw new Error("Failed to fetch assets");
             }

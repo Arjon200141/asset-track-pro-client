@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Navbar from "../Home/Navbar";
 import useAxiosSecure from "../Axios/useAxiosSecure";
 
 const AddAssetList = ({ onAssetAdded }) => {
@@ -41,12 +40,10 @@ const AddAssetList = ({ onAssetAdded }) => {
             console.error("Error adding asset", error);
         }
     };
-
     return (
-        <div>
-            <Navbar />
-            <div className="bg-sky-50">
-                <div className="mx-96">
+        <div className="">
+            <div className="bg-sky-50 py-16">
+                <div className="mx-12">
                     <div className="hero min-h-screen ">
                         <div className=" w-full shadow-2xl bg-sky-100 rounded-xl">
                             <h2 className="text-4xl font-semibold text-center mt-8">Add an Asset</h2>

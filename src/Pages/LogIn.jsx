@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProviders";
 import Swal from "sweetalert2";
 import SocialLogin from "./SocialLogin";
-import axiosInstance from "../Providers/AxiosInstance/axiosinstance";
 
 const LogIn = () => {
     const [users, setUsers] = useState([]);
@@ -14,8 +13,18 @@ const LogIn = () => {
     const { signIn, setUserRole, userRole } = useContext(AuthContext);
 
     useEffect(() => {
-        axiosInstance.get('/users')
-            .then(res => setUsers(res.data));
+        // Fetch users from the server
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch('https://assettrack-pro-server.vercel.app/users');
+                const data = await response.json();
+                setUsers(data);
+            } catch (error) {
+                console.error("Failed to fetch users", error);
+            }
+        };
+
+        fetchUsers();
     }, []);
 
     const handleLogIn = async (e) => {
@@ -28,15 +37,20 @@ const LogIn = () => {
             const result = await signIn(email, password);
             const user = result.user;
             console.log(user);
+
             Swal.fire({
-                title: "Logged In !",
+                title: "Logged In!",
                 text: "You have Logged In Successfully!!!",
                 icon: "success"
             });
 
             const match = users.find(item => item.userId === user.uid);
-            setUserRole(match.role);
-            console.log(userRole);
+            if (match) {
+                setUserRole(match.role);
+                console.log(userRole);
+            } else {
+                console.error("User role not found");
+            }
 
             navigate(from, { replace: true });
         } catch (error) {

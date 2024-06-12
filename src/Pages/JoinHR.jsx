@@ -1,3 +1,5 @@
+// src/components/JoinHR.js
+
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { SlArrowDown } from "react-icons/sl";
@@ -112,8 +114,8 @@ const JoinHR = () => {
                             </div>
                             <div className="flex justify-start items-end p-0 mt-4">
                                 <div className="dropdown dropdown-right">
-                                    <div tabIndex={0} role="button" className="w-[600px] btn text-lg" onClick={() => setSelectedPackage(null)}>
-                                        Select a package <SlArrowDown />
+                                    <div tabIndex={0} role="button" className="w-[600px] btn text-lg">
+                                        {selectedPackage ? selectedPackage : "Select a package"} <SlArrowDown />
                                     </div>
                                     <ul tabIndex={0} className="dropdown-content z-[1] text-lg menu p-2 shadow bg-white rounded-box w-52">
                                         <li><a onClick={() => setSelectedPackage("5 Members for $5")}>5 Members for $5</a></li>

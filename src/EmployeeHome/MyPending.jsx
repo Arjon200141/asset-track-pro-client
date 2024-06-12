@@ -1,4 +1,3 @@
-// PendingRequests.js
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../Providers/AuthProviders";
 
@@ -12,7 +11,7 @@ const MyPending = () => {
 
     const fetchPendingRequests = async () => {
         try {
-            const response = await fetch(`http://localhost:4000/requests?email=${user.email}`);
+            const response = await fetch(`https://assettrack-pro-server.vercel.app/requests?email=${user.email}`);
             const data = await response.json();
             const pending = data.filter(request => request.RequestStatus === "Pending");
             setPendingRequests(pending);
@@ -22,7 +21,7 @@ const MyPending = () => {
     };
 
     return (
-        <div className="p-4 bg-fuchsia-50 pl-40 mt-10">
+        <div className=" bg-fuchsia-50 py-12 ">
             <h2 className="text-4xl font-semibold text-center">Pending Requests</h2>
             <div className="overflow-x-auto mx-12 mt-6">
                 <table className="table table-lg">

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosSecure = axios.create({
-    baseURL: 'http://localhost:4000'
+    baseURL: 'https://assettrack-pro-server.vercel.app'
 })
 
 const useAxiosSecure = () => {

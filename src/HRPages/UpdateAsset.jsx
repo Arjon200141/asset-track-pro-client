@@ -14,7 +14,7 @@ const UpdateAsset = () => {
         const status = form.status.value;
         const updatedAsset = { type,quantity,status };
         console.log(updatedAsset);
-        fetch(`http://localhost:4000/assets/${loader._id}`, {
+        fetch(`https://assettrack-pro-server.vercel.app/assets/${loader._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

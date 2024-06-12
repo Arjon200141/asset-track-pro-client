@@ -15,7 +15,7 @@ const HRProfile = _id => {
         // Ensure the new user is formatted correctly
         const updatedUser = { displayName: name };
         
-        fetch(`http://localhost:4000/users/${_id}`, {
+        fetch(`https://assettrack-pro-server.vercel.app/users/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

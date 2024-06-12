@@ -10,7 +10,7 @@ const TopReq= () => {
 
     const fetchTopRequestedItems = async () => {
         try {
-            const response = await fetch("http://localhost:4000/allrequests");
+            const response = await fetch("https://assettrack-pro-server.vercel.app/allrequests");
             const requests = await response.json();
             const pendingRequests = requests.filter(request => request.RequestStatus === "Pending");
 

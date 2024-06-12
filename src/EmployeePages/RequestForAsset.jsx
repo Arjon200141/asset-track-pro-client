@@ -56,7 +56,7 @@ const RequestForAsset = () => {
             RequestStatus: "Pending"
         };
         console.log(request);
-        fetch('http://localhost:4000/requests', {
+        fetch('https://assettrack-pro-server.vercel.app/requests', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
