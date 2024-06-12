@@ -22,11 +22,14 @@ import HRDashBoard from "../HRDashBoard/HRDashBoard";
 import Home from "../Home/Home";
 import EmployeeDashBoard from "../EmployeeNavbar/EmployeeNavbar";
 import MyTeam from "../EmployeePages/MyTeam";
+import ErrorPage from "../ErrorElement/ErrorPage";
+import CheckOutForm from "../Payment/CheckOutForm";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -44,7 +47,7 @@ const router = createBrowserRouter([
         path: "/login",
         element: <LogIn></LogIn>
       },
-      
+
       {
         path: "/updateasset/:id",
         element: <UpdateAsset></UpdateAsset>,
@@ -52,13 +55,14 @@ const router = createBrowserRouter([
       },
       {
         path: "/buy-package",
-        element: <BuyPackage></BuyPackage>,
-        loader: () => fetch('https://assettrack-pro-server.vercel.app/package-info')
+        element: <BuyPackage />,
+        loader: () => fetch('https://assettrack-pro-server.vercel.app/package-info'),
       },
       {
         path: "/payment/:id",
-        element: <Payment></Payment>
-      },
+        element: <Payment></Payment>,
+        loader: ({ params }) => fetch(`https://assettrack-pro-server.vercel.app/package-info/${params.id}`)
+      }
     ]
   },
   {
@@ -85,7 +89,7 @@ const router = createBrowserRouter([
 
       {
         path: "addemployee",
-        element: <AddEmployee></AddEmployee>
+        element: <AddEmployee></AddEmployee>,
       },
       {
         path: "profile",
@@ -95,6 +99,8 @@ const router = createBrowserRouter([
         path: "myemployee",
         element: <EmployeeList></EmployeeList>
       },
+
+
     ]
   },
   {
@@ -120,8 +126,8 @@ const router = createBrowserRouter([
         element: <Profile></Profile>
       },
       {
-        path:"myteam",
-        element:<MyTeam></MyTeam>
+        path: "myteam",
+        element: <MyTeam></MyTeam>
       }
     ]
   }

@@ -1,99 +1,123 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
-import useAxiosSecure from "../Axios/useAxiosSecure";
 import { AuthContext } from "../Providers/AuthProviders";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../Axios/useAxiosSecure";
 
-const CheckOutForm = () => {
+const CheckOutForm = ({ packageData }) => {
+    const [error, setError] = useState('');
+    const [clientSecret, setClientSecret] = useState('');
+    const [transactionId, setTransactionId] = useState('');
     const stripe = useStripe();
     const elements = useElements();
-    const [clientSecret, setClientSecret] = useState([]);
     const axiosSecure = useAxiosSecure();
     const { user } = useContext(AuthContext);
-    const packages = [
-        { id: 1, members: 5, price: 5 },
-        { id: 2, members: 10, price: 8 },
-        { id: 3, members: 20, price: 15 }
-    ];
-    const price = packages.price;
+    const totalPrice = packageData.price;
 
     useEffect(() => {
-        axiosSecure.post('/create-payment-intent', { price: price })
-            .then(res => {
-                console.log(res.data.clientSecret);
-                setClientSecret(res.data.clientSecret);
-            })
-    }, [axiosSecure, price])
+        if (totalPrice > 0) {
+            axiosSecure.post('/create-payment-intent', { price: totalPrice })
+                .then(res => {
+                    console.log(res.data.clientSecret);
+                    if (res.data.clientSecret) {
+                        setClientSecret(res.data.clientSecret);
+                    } else {
+                        setError('Failed to create payment intent');
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    setError('An error occurred while creating payment intent');
+                });
+        }
+    }, [axiosSecure, totalPrice]);
 
     const handleSubmit = async (event) => {
-
         event.preventDefault();
 
         if (!stripe || !elements) {
             return;
         }
+
         const card = elements.getElement(CardElement);
 
-        if (card == null) {
+        if (card === null) {
             return;
         }
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+
+        const { error: paymentMethodError, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
             card
-        })
+        });
 
-        if (error) {
-            console.log('Payment Error', error);
+        if (paymentMethodError) {
+            console.log('payment error', paymentMethodError);
+            setError(paymentMethodError.message);
+            return;
+        } else {
+            console.log('payment method', paymentMethod);
+            setError('');
         }
-        else {
-            console.log('Payment method', paymentMethod);
+
+        if (!clientSecret) {
+            setError('Invalid client secret');
+            return;
         }
 
         const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: card,
                 billing_details: {
-                    email: user.email || 'Anonymous',
-                    name: user.displayName || 'Anonymous'
+                    email: user?.email || 'anonymous',
+                    name: user?.displayName || 'anonymous'
                 }
             }
         });
 
-        if(confirmError){
-            console.log('Confirm Error');
+        if (confirmError) {
+            console.log('confirm error', confirmError);
+            setError(confirmError.message);
+        } else {
+            console.log('payment intent', paymentIntent);
+            if (paymentIntent.status === 'succeeded') {
+                console.log('transaction id', paymentIntent.id);
+                setTransactionId(paymentIntent.id);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Thank you for the taka paisa",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
         }
-        else{
-            console.log(paymentIntent);
-        }
+    };
 
-    }
     return (
-        <div>
-            <Helmet>
-                <title>CheckOut Form</title>
-            </Helmet>
-            <form onSubmit={handleSubmit}>
-                <CardElement
-                    options={{
-                        style: {
-                            base: {
-                                fontSize: '16px',
-                                color: '#424770',
-                                '::placeholder': {
-                                    color: '#aab7c4',
-                                },
-                            },
-                            invalid: {
-                                color: '#9e2146',
+        <form onSubmit={handleSubmit}>
+            <CardElement
+                options={{
+                    style: {
+                        base: {
+                            fontSize: '16px',
+                            color: '#424770',
+                            '::placeholder': {
+                                color: '#aab7c4',
                             },
                         },
-                    }}
-                />
-                <button className="my-8 text-2xl font-semibold" type="submit" disabled={!stripe}>
-                    Pay
-                </button>
-            </form>
-        </div>
+                        invalid: {
+                            color: '#9e2146',
+                        },
+                    },
+                }}
+            />
+            <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe}>
+                Pay
+            </button>
+            <p className="text-red-600">{error}</p>
+            {transactionId && <p className="text-green-600">Your transaction id: {transactionId}</p>}
+        </form>
     );
 };
 

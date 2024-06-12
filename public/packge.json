@@ -1,0 +1,21 @@
+[
+    {
+      "name": "Starter Package",
+      "description": "Ideal for small teams, this package provides comprehensive asset tracking for up to 5 employees.",
+      "employee": "Maximum 5 employees",
+      "price": "5$"
+    },
+    {
+      "name": "Growth Package",
+      "description": "Perfect for growing businesses, this package offers asset management for up to 10 employees.",
+      "employee": "Maximum 10 employees",
+      "price": "8$"
+    },
+    {
+      "name": "Business Package",
+      "description": "Designed for larger teams, this package ensures efficient asset tracking for up to 20 employees.",
+      "employee": "Maximum 20 employees",
+      "price": "15$"
+    }
+  ]
+  

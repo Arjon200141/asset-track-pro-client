@@ -10,7 +10,6 @@ import { Helmet } from "react-helmet-async";
 
 const HRDashBoard = () => {
     const { user, loading } = useContext(AuthContext);
-    console.log(user);
 
     if (loading) {
         return <div>Loading...</div>;

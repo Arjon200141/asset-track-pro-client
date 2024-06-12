@@ -1,5 +1,5 @@
-import { useState, useEffect} from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link} from "react-router-dom";
 import useAxiosPublic from "../Axios/useAxiosPublic";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
@@ -12,18 +12,18 @@ const PackageSection = () => {
     const [selectedMembers, setSelectedMembers] = useState([]);
     const [teamMembers, setTeamMembers] = useState([]);
     const axiosPublic = useAxiosPublic();
-    
+
 
     useEffect(() => {
         const fetchPackageInfo = async () => {
             try {
                 const response = await axiosPublic.get("/package-info");
-                setPackageLimit(response.data.members); 
+                setPackageLimit(response.data.members);
             } catch (error) {
                 console.error("Error fetching package info", error);
             }
         };
-    
+
         const fetchUnaffiliatedMembers = async () => {
             try {
                 const response = await axiosPublic.get("/unaffiliated-members");
@@ -32,18 +32,18 @@ const PackageSection = () => {
                 console.error("Error fetching unaffiliated members", error);
             }
         };
-    
+
         const fetchTeamMembers = async () => {
             try {
-                const response = await axiosPublic.get("/usersemp?role=employee");
+                const response = await axiosPublic.get("/usersemp?.role=employee");
                 setTeamMembers(response.data);
                 setEmployeeCount(response.data.length);
             } catch (error) {
                 console.error("Error fetching team members", error);
             }
         };
-        
-    
+
+
         fetchPackageInfo();
         fetchUnaffiliatedMembers();
         fetchTeamMembers();
@@ -107,25 +107,25 @@ const PackageSection = () => {
             </Helmet>
             <div className="bg-red-50 py-12 space-y-4">
                 <p className="text-3xl font-semibold text-center my-4">Current Employee in Team: {employeeCount}</p>
-                <p className="text-2xl font-semibold text-center my-4">Package Limit: 5</p>
+                <p className="text-2xl font-semibold text-center my-4">Package Limit: { }</p>
                 <Link to="/buy-package" className="flex justify-center">
                     <button className="btn bg-lime-100 text-xl font-semibold">Increase Limit</button>
                 </Link>
             </div>
 
             <div className="bg-green-50">
-            <div className="md:mx-52 space-y-4 py-12 ">
-                <h3 className="text-3xl font-semibold text-center">Team Members</h3>
-                {teamMembers.map((member) => (
-                    <div className="md:flex items-center justify-between" key={member._id}>
-                        <div>
-                        <p>Name: {member.name}</p>
-                        <p>Email: {member.email}</p>
+                <div className="md:mx-52 space-y-4 py-12 ">
+                    <h3 className="text-3xl font-semibold text-center">Team Members</h3>
+                    {teamMembers.map((member) => (
+                        <div className="md:flex items-center justify-between" key={member._id}>
+                            <div>
+                                <p>Name: {member.name}</p>
+                                <p>Email: {member.email}</p>
+                            </div>
+                            <button onClick={() => handleRemoveMember(member._id)}>Remove From Team</button>
                         </div>
-                        <button onClick={() => handleRemoveMember(member._id)}>Remove From Team</button>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
             </div>
 
             <div className="mb-12 bg-purple-50 py-12">
@@ -146,7 +146,7 @@ const PackageSection = () => {
                     <button className="btn w-full bg-sky-200 text-xl font-semibold" onClick={handleAddSelectedMembers}>Add Selected Members to the Team</button>
                 </div>
             </div>
-            
+
 
         </div>
     );

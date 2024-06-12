@@ -1,67 +1,31 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import useAxiosPublic from "../Axios/useAxiosPublic";
-import Swal from "sweetalert2";
+import { Link, useLoaderData } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 const BuyPackage = () => {
-    const [selectedPackage, setSelectedPackage] = useState(null);
-    const axiosPublic = useAxiosPublic();
-    const navigate = useNavigate();
 
-    const packages = [
-        { id: 1, members: 5, price: 5 },
-        { id: 2, members: 10, price: 8 },
-        { id: 3, members: 20, price: 15 }
-    ];
-
-    const handlePackageSelect = (packageId) => {
-        setSelectedPackage(packageId);
-    };
-
-    const handlePurchase = async () => {
-        if (selectedPackage === null) {
-            Swal.fire("Error", "Please select a package", "error");
-            return;
-        }
-
-        try {
-            const response = await axiosPublic.post("/buy-package", { packageId: selectedPackage });
-            if (response.data.success) {
-                Swal.fire("Success", "Package purchased successfully", "success");
-                navigate("/package-section");
-            }
-        } catch (error) {
-            console.error("Error purchasing package", error);
-            Swal.fire("Error", "Could not purchase package", "error");
-        }
-    };
+    const packages = useLoaderData();
 
     return (
-        <div>
+        <div className="text-2xl bg-sky-50">
             <Helmet>
                 <title>Buy Package</title>
             </Helmet>
-            <h2>Buy Package</h2>
-            <div>
+            <h2 className="text-4xl font-semibold py-12 text-center">Buy Package</h2>
+            <div className="grid md:grid-cols-3 gap-6 mt-8 md:mx-8 py-6">
                 {packages.map(pkg => (
-                    <div key={pkg.id}>
-                        <input
-                            type="radio"
-                            checked={selectedPackage === pkg.id}
-                            onChange={() => handlePackageSelect(pkg.id)}
-                        />
-                        <label>
-                            {pkg.members} Members for ${pkg.price}
-                        </label>
+                    <div key={pkg._id} className="card  bg-sky-100 shadow-2xl">
+                        <div className="card-body space-y-3">
+                            <h2 className="text-center text-3xl font-semibold">{pkg.name}</h2>
+                            <p className="text-xl pr-4">{pkg.description}</p>
+                            <p className="text-xl"><span className="font-semibold">Employee :</span>{pkg.employee}</p>
+                            <p className="text-xl"><span className="font-semibold">Price :</span>{pkg.price}</p>
+                            <Link to={`/payment/${pkg._id}`}>
+                                <button className="btn bg-blue-500 text-white">Purchase</button>
+                            </Link>
+                        </div>
                     </div>
                 ))}
             </div>
-
-            <Link to={`/payment/${packages.price}`}>
-                <button onClick={handlePurchase}>Purchase</button>
-            </Link>
-            
         </div>
     );
 };
