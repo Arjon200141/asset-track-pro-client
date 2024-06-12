@@ -23,7 +23,7 @@ import Home from "../Home/Home";
 import EmployeeDashBoard from "../EmployeeNavbar/EmployeeNavbar";
 import MyTeam from "../EmployeePages/MyTeam";
 import ErrorPage from "../ErrorElement/ErrorPage";
-import CheckOutForm from "../Payment/CheckOutForm";
+
 
 const router = createBrowserRouter([
   {

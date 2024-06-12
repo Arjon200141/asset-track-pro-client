@@ -4,6 +4,7 @@ import { AuthContext } from "../Providers/AuthProviders";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../Axios/useAxiosSecure";
+import { useNavigate } from "react-router-dom";
 
 const CheckOutForm = ({ packageData }) => {
     const [error, setError] = useState('');
@@ -14,6 +15,7 @@ const CheckOutForm = ({ packageData }) => {
     const axiosSecure = useAxiosSecure();
     const { user } = useContext(AuthContext);
     const totalPrice = packageData.price;
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (totalPrice > 0) {
@@ -86,16 +88,22 @@ const CheckOutForm = ({ packageData }) => {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: "Thank you for the taka paisa",
+                    title: "Thank you for the Payment",
                     showConfirmButton: false,
                     timer: 1500
                 });
+                navigate('/dashboard/addemployee', { state: { packageLimit: packageData.employee } });
             }
         }
     };
 
     return (
         <form onSubmit={handleSubmit}>
+            <Helmet>
+                <title>
+                    Payment
+                </title>
+            </Helmet>
             <CardElement
                 options={{
                     style: {
@@ -112,11 +120,11 @@ const CheckOutForm = ({ packageData }) => {
                     },
                 }}
             />
-            <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe}>
-                Pay
+            <button className="btn btn-md px-8 text-2xl font-semibold py-2 bg-lime-200 my-4" type="submit" disabled={!stripe}>
+                Pay {totalPrice} $ 
             </button>
-            <p className="text-red-600">{error}</p>
-            {transactionId && <p className="text-green-600">Your transaction id: {transactionId}</p>}
+            <p className="text-red-600 text-2xl font-semibold">{error}</p>
+            {transactionId && <p className= "text-xl font-semibold text-green-600">Your transaction id: {transactionId}</p>}
         </form>
     );
 };

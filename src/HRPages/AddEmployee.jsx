@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { Link} from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useAxiosPublic from "../Axios/useAxiosPublic";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
-
 
 const PackageSection = () => {
     const [employeeCount, setEmployeeCount] = useState(0);
@@ -12,17 +11,22 @@ const PackageSection = () => {
     const [selectedMembers, setSelectedMembers] = useState([]);
     const [teamMembers, setTeamMembers] = useState([]);
     const axiosPublic = useAxiosPublic();
-
+    const location = useLocation();
 
     useEffect(() => {
-        const fetchPackageInfo = async () => {
-            try {
-                const response = await axiosPublic.get("/package-info");
-                setPackageLimit(response.data.members);
-            } catch (error) {
-                console.error("Error fetching package info", error);
-            }
-        };
+        if (location.state?.packageLimit) {
+            setPackageLimit(location.state.packageLimit);
+        } else {
+            const fetchPackageInfo = async () => {
+                try {
+                    const response = await axiosPublic.get("/package-info");
+                    setPackageLimit(response.data.members);
+                } catch (error) {
+                    console.error("Error fetching package info", error);
+                }
+            };
+            fetchPackageInfo();
+        }
 
         const fetchUnaffiliatedMembers = async () => {
             try {
@@ -35,19 +39,18 @@ const PackageSection = () => {
 
         const fetchTeamMembers = async () => {
             try {
-                const response = await axiosPublic.get("/usersemp?.role=employee");
-                setTeamMembers(response.data);
-                setEmployeeCount(response.data.length);
+                const response = await axiosPublic.get("/users?role=employee");
+                const limitedMembers = response.data.slice(0, packageLimit);
+                setTeamMembers(limitedMembers);
+                setEmployeeCount(limitedMembers.length);
             } catch (error) {
                 console.error("Error fetching team members", error);
             }
         };
 
-
-        fetchPackageInfo();
         fetchUnaffiliatedMembers();
         fetchTeamMembers();
-    }, [axiosPublic]);
+    }, [axiosPublic, location.state, packageLimit]);
 
     const handleSelectMember = (memberId) => {
         setSelectedMembers((prevSelectedMembers) =>
@@ -107,7 +110,7 @@ const PackageSection = () => {
             </Helmet>
             <div className="bg-red-50 py-12 space-y-4">
                 <p className="text-3xl font-semibold text-center my-4">Current Employee in Team: {employeeCount}</p>
-                <p className="text-2xl font-semibold text-center my-4">Package Limit: { }</p>
+                <p className="text-2xl font-semibold text-center my-4">Package Limit: {packageLimit}</p>
                 <Link to="/buy-package" className="flex justify-center">
                     <button className="btn bg-lime-100 text-xl font-semibold">Increase Limit</button>
                 </Link>
@@ -116,15 +119,22 @@ const PackageSection = () => {
             <div className="bg-green-50">
                 <div className="md:mx-52 space-y-4 py-12 ">
                     <h3 className="text-3xl font-semibold text-center">Team Members</h3>
-                    {teamMembers.map((member) => (
-                        <div className="md:flex items-center justify-between" key={member._id}>
-                            <div>
-                                <p>Name: {member.name}</p>
-                                <p>Email: {member.email}</p>
+                    {teamMembers.length > 0 ? (
+                        teamMembers.map((member) => (
+                            <div className="md:flex items-center justify-between" key={member._id}>
+                                <div>
+                                    <p>Name: {member.name}</p>
+                                    <p>Email: {member.email}</p>
+                                </div>
+                                <button onClick={() => handleRemoveMember(member._id)}>Remove From Team</button>
                             </div>
-                            <button onClick={() => handleRemoveMember(member._id)}>Remove From Team</button>
-                        </div>
-                    ))}
+                        ))
+                    ) : (
+                        <p>No team members yet.</p>
+                    )}
+                    {employeeCount >= packageLimit && (
+                        <p className="text-red-500">Maximum employee limit reached.</p>
+                    )}
                 </div>
             </div>
 
@@ -138,7 +148,6 @@ const PackageSection = () => {
                             onChange={() => handleSelectMember(member._id)}
                         />
                         <p>{member.email}</p>
-
                         <button onClick={() => handleAddMember(member._id)} className="btn bg-emerald-50">Add to the team</button>
                     </div>
                 ))}
@@ -146,8 +155,6 @@ const PackageSection = () => {
                     <button className="btn w-full bg-sky-200 text-xl font-semibold" onClick={handleAddSelectedMembers}>Add Selected Members to the Team</button>
                 </div>
             </div>
-
-
         </div>
     );
 };

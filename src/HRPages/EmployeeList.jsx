@@ -30,7 +30,7 @@ const EmployeeList = () => {
                 method: 'DELETE'
             });
             if (response.ok) {
-                fetchEmployees(); 
+                fetchEmployees();
                 Swal.fire({
                     title: 'Success!',
                     text: 'Employee removed from the team.',
@@ -57,16 +57,24 @@ const EmployeeList = () => {
                     <table className="table md:table-lg">
                         <thead>
                             <tr className="md:text-2xl">
-                                <th>Email</th>
+                                <th>Image</th>
                                 <th>Name</th>
+                                <th>Type</th>
                                 <th>Remove From Team</th>
                             </tr>
                         </thead>
                         <tbody className='md:text-xl'>
                             {employees.map((employee, index) => (
-                                <tr  key={index}>
-                                    <td>{employee.email}</td>
+                                <tr key={index}>
+                                    <td><img src={employee.user.image} alt="Employee" className="w-16 h-16 rounded-full" /></td>
                                     <td>{employee.user.displayName}</td>
+                                    <td>
+                                        {employee.user.type === 'admin' ? (
+                                            <span className="text-red-500">Admin</span>
+                                        ) : (
+                                            <span className="text-green-500">Normal Employee</span>
+                                        )}
+                                    </td>
                                     <td className='flex justify-center'>
                                         <button
                                             className="btn bg-red-200 text-xl font-semibold"
