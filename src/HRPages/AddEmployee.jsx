@@ -119,7 +119,7 @@ const PackageSection = () => {
             <div className="bg-green-50">
                 <div className="md:mx-52 space-y-4 py-12 ">
                     <h3 className="text-3xl font-semibold text-center">Team Members</h3>
-                    {teamMembers.length > 0 ? (
+                    {teamMembers.length >= 0 ? (
                         teamMembers.map((member) => (
                             <div className="md:flex items-center justify-between" key={member._id}>
                                 <div>

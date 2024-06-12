@@ -17,10 +17,10 @@ const BuyPackage = () => {
                         <div className="card-body space-y-3">
                             <h2 className="text-center text-3xl font-semibold">{pkg.name}</h2>
                             <p className="text-xl pr-4">{pkg.description}</p>
-                            <p className="text-xl"><span className="font-semibold">Employee :</span>{pkg.employee}</p>
-                            <p className="text-xl"><span className="font-semibold">Price :</span>{pkg.price}</p>
+                            <p className="text-xl"><span className="font-semibold">Employee : </span>Maximum {pkg.employee} Employees</p>
+                            <p className="text-xl"><span className="font-semibold">Price :</span> {pkg.price} $</p>
                             <Link to={`/payment/${pkg._id}`}>
-                                <button className="btn bg-blue-500 text-white">Purchase</button>
+                                <button className="btn bg-blue-400 text-2xl py-2 text-white px-8">Purchase</button>
                             </Link>
                         </div>
                     </div>

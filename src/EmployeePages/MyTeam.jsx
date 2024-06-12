@@ -1,22 +1,24 @@
-import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../Axios/useAxiosPublic";
 
 const MyTeamPage = () => {
-  const [employees, setEmployees] = useState([]);
   const axiosPublic = useAxiosPublic();
 
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const response = await axiosPublic.get("/usersemp");
-        setEmployees(response.data);
-      } catch (error) {
-        console.error("Error fetching employees", error);
-      }
-    };
+  const { data: employees = [], isLoading, error } = useQuery({
+    queryKey: ["employees"],
+    queryFn: async () => {
+      const response = await axiosPublic.get("/usersemp");
+      return response.data;
+    },
+  });
 
-    fetchEmployees();
-  }, [axiosPublic]);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error fetching employees: {error.message}</div>;
+  }
 
   return (
     <div>

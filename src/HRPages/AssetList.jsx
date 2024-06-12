@@ -11,8 +11,8 @@ const AssetList = () => {
     const [stockFilter, setStockFilter] = useState("");
     const [assetTypeFilter, setAssetTypeFilter] = useState("");
     const [sortOption, setSortOption] = useState("");
-    const [currentPage, setCurrentPage] = useState(0); // Start with page 0 (first page)
-    const itemsPerPage = 7; // Number of items per page
+    const [currentPage, setCurrentPage] = useState(0); 
+    const itemsPerPage = 7; 
     const axiosPublic = useAxiosPublic();
 
     const fetchAssets = async () => {
