@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
+import ReactPaginate from 'react-paginate';
 
 const AllRequest = () => {
     const [requests, setRequests] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0); // Current page index
+    const itemsPerPage = 7; // Number of requests per page
 
     useEffect(() => {
         fetchRequests();
@@ -65,6 +68,13 @@ const AllRequest = () => {
         }
     };
 
+    const offset = currentPage * itemsPerPage;
+    const currentRequests = requests.slice(offset, offset + itemsPerPage);
+
+    const handlePageChange = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
     return (
         <div>
             <Helmet>
@@ -87,7 +97,7 @@ const AllRequest = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {requests.map((request, index) => (
+                            {currentRequests.map((request, index) => (
                                 <tr key={index}>
                                     <td>{request.ProductName}</td>
                                     <td>{request.ProductType}</td>
@@ -116,6 +126,21 @@ const AllRequest = () => {
                             ))}
                         </tbody>
                     </table>
+                </div>
+                <div className="flex justify-center mt-4">
+                    <ReactPaginate
+                        previousLabel={'Previous'}
+                        nextLabel={'Next'}
+                        breakLabel={'...'}
+                        breakClassName={'break-me'}
+                        pageCount={Math.ceil(requests.length / itemsPerPage)}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={handlePageChange}
+                        containerClassName={'pagination'}
+                        activeClassName={'active'}
+                        className="bg-green-200 py-4 px-2 md:px-8 rounded-xl flex gap-4\ md:gap-12 my-4 font-semibold"
+                    />
                 </div>
             </div>
         </div>

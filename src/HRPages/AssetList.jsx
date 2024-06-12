@@ -3,6 +3,7 @@ import useAxiosPublic from "../Axios/useAxiosPublic";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import ReactPaginate from 'react-paginate';
 
 const AssetList = () => {
     const [assets, setAssets] = useState([]);
@@ -10,6 +11,8 @@ const AssetList = () => {
     const [stockFilter, setStockFilter] = useState("");
     const [assetTypeFilter, setAssetTypeFilter] = useState("");
     const [sortOption, setSortOption] = useState("");
+    const [currentPage, setCurrentPage] = useState(0); // Start with page 0 (first page)
+    const itemsPerPage = 7; // Number of items per page
     const axiosPublic = useAxiosPublic();
 
     const fetchAssets = async () => {
@@ -34,7 +37,7 @@ const AssetList = () => {
         setAssets([...assets, newAsset]);
     };
 
-    const handleDelete = _id => {
+    const handleDelete = (_id) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -83,6 +86,16 @@ const AssetList = () => {
         }
         return 0;
     });
+
+    const pageCount = Math.ceil(filteredData.length / itemsPerPage);
+
+    const handlePageClick = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
+    const offset = currentPage * itemsPerPage;
+
+    const currentData = filteredData.slice(offset, offset + itemsPerPage);
 
     return (
         <div>
@@ -142,9 +155,9 @@ const AssetList = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {filteredData.map((asset, index) => (
+                            {currentData.map((asset, index) => (
                                 <tr key={index}>
-                                    <td>{index + 1}</td>
+                                    <td>{offset + index + 1}</td>
                                     <td>{asset.productName}</td>
                                     <td>{asset.productType}</td>
                                     <td>{asset.productQuantity}</td>
@@ -152,7 +165,6 @@ const AssetList = () => {
                                     <td>{asset.assetType}</td>
                                     <td>{asset.dateAdded}</td>
                                     <td className="flex gap-6 mt-4 justify-center">
-
                                         <Link to={`/updateasset/${asset._id}`}>
                                             <button>Update</button>
                                         </Link>
@@ -162,6 +174,21 @@ const AssetList = () => {
                             ))}
                         </tbody>
                     </table>
+                </div>
+                <div className="flex justify-center mt-4">
+                    <ReactPaginate
+                        previousLabel={"Previous"}
+                        nextLabel={"Next"}
+                        breakLabel={"..."}
+                        breakClassName={"break-me"}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={handlePageClick}
+                        containerClassName={"pagination"}
+                        activeClassName={"active"}
+                        className="bg-green-200 py-4 px-8 rounded-xl flex gap-12 my-4 font-semibold"
+                    />
                 </div>
             </div>
         </div>

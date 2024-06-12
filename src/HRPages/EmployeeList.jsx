@@ -11,7 +11,7 @@ const EmployeeList = () => {
 
     const fetchEmployees = async () => {
         try {
-            const response = await fetch('https://assettrack-pro-server.vercel.app/users?role=employee');
+            const response = await fetch('https://assettrack-pro-server.vercel.app/users?.role=employee');
             if (response.ok) {
                 const data = await response.json();
                 const employees = data.filter(user => user.role === 'employee');
