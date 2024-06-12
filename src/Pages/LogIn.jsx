@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProviders";
 import Swal from "sweetalert2";
 import SocialLogin from "./SocialLogin";
+import { Helmet } from "react-helmet-async";
 
 const LogIn = () => {
     const [users, setUsers] = useState([]);
@@ -13,7 +14,6 @@ const LogIn = () => {
     const { signIn, setUserRole, userRole } = useContext(AuthContext);
 
     useEffect(() => {
-        // Fetch users from the server
         const fetchUsers = async () => {
             try {
                 const response = await fetch('https://assettrack-pro-server.vercel.app/users');
@@ -65,6 +65,9 @@ const LogIn = () => {
 
     return (
         <div className="hero-content py-12 bg-fuchsia-50">
+            <Helmet>
+                <title>Log In</title>
+            </Helmet>
             <div className="py-8 card shrink-0 w-full max-w-lg shadow-xl bg-fuchsia-100">
                 <h2 data-aos="flip-left" className="text-3xl text-center font-semibold mt-4 pt-6">Log in to your account</h2>
                 <form onSubmit={handleLogIn} className="card-body text-xl">

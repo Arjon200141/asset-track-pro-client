@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../Axios/useAxiosPublic";
 import Swal from "sweetalert2";
-import Navbar from "../Home/Navbar";
+import { Helmet } from "react-helmet-async";
 
 const BuyPackage = () => {
     const [selectedPackage, setSelectedPackage] = useState(null);
@@ -39,7 +39,9 @@ const BuyPackage = () => {
 
     return (
         <div>
-            <Navbar />
+            <Helmet>
+                <title>Buy Package</title>
+            </Helmet>
             <h2>Buy Package</h2>
             <div>
                 {packages.map(pkg => (

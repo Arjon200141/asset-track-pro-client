@@ -1,5 +1,3 @@
-
-
 const HRPages = () => {
     return (
         <div>

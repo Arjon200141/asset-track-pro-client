@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../Providers/AuthProviders";
 import useAxiosPublic from "../Axios/useAxiosPublic";
 import SocialLogin from "./SocialLogin";
+import { Helmet } from "react-helmet-async";
 
 const JoinEmployee = () => {
     const axiosPublic = useAxiosPublic();
@@ -52,6 +53,9 @@ const JoinEmployee = () => {
 
     return (
         <div className="bg-sky-50">
+            <Helmet>
+                <title>Join as Employee</title>
+            </Helmet>
             <div className="mx-80 py-12">
                 <div className="hero min-h-screen">
                     <div className="w-full shadow-2xl bg-sky-100 rounded-xl">

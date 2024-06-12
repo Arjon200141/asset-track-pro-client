@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import Calendar from "./Calender";
 import Events from "./Events";
 import MonthlyReq from "./MonthLyReq";
@@ -7,6 +8,9 @@ import Notice from "./Notice";
 const EmployeeHome = () => {
     return (
         <div>
+            <Helmet>
+                <title>Employee Home</title>
+            </Helmet>
             <MyPending></MyPending>
             <MonthlyReq></MonthlyReq>
             <div className="m-8 my-16">

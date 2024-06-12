@@ -1,10 +1,11 @@
-import { useLoaderData } from "react-router-dom";
-import Navbar from "../Home/Navbar";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const UpdateAsset = () => {
     const loader = useLoaderData();
     console.log(loader);
+    const navigate = useNavigate();
 
     const handleUpdate = e => {
         e.preventDefault();
@@ -12,7 +13,7 @@ const UpdateAsset = () => {
         const type = form.type.value;
         const quantity = form.quantity.value;
         const status = form.status.value;
-        const updatedAsset = { type,quantity,status };
+        const updatedAsset = { type, quantity, status };
         console.log(updatedAsset);
         fetch(`https://assettrack-pro-server.vercel.app/assets/${loader._id}`, {
             method: 'PUT',
@@ -31,13 +32,16 @@ const UpdateAsset = () => {
                         icon: 'success',
                         confirmButtonText: 'Close'
                     })
+                    navigate("/");
                 }
             })
     }
 
     return (
         <div>
-            <Navbar></Navbar>
+            <Helmet>
+                <title>Update Asset</title>
+            </Helmet>
             <div className="bg-lime-50 mb-12 py-8">
                 <h2 className="text-4xl text-center font-semibold ">Update Details of : {loader.productName}</h2>
                 <form className="md:mx-36 py-10 text-lg" onSubmit={handleUpdate}>

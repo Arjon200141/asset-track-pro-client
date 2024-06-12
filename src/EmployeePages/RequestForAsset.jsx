@@ -1,8 +1,8 @@
 import { useLoaderData } from "react-router-dom";
-import Navbar from "../Home/Navbar";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Providers/AuthProviders";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const RequestForAsset = () => {
     const assetData = useLoaderData();
@@ -89,7 +89,9 @@ const RequestForAsset = () => {
 
     return (
         <div>
-            <Navbar />
+            <Helmet>
+                <title>Request for Asset</title>
+            </Helmet>
             <div className="p-4 bg-fuchsia-50 pl-40">
                 <h2 className="text-4xl font-semibold text-center">All Assets</h2>
                 <div className="flex flex-col justify-center md:flex-row gap-4 my-10">

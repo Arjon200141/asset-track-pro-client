@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
 
 const EmployeeList = () => {
@@ -46,6 +47,9 @@ const EmployeeList = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Employee List</title>
+            </Helmet>
             <div className="p-4 bg-fuchsia-50 pl-12">
                 <h2 className="text-4xl font-semibold text-center">Employee List</h2>
                 <div className="overflow-x-auto mx-12">

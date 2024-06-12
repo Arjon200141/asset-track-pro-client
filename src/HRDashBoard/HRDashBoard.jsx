@@ -6,6 +6,7 @@ import { AuthContext } from "../Providers/AuthProviders";
 import { IoIosAddCircle } from "react-icons/io";
 import { GrUserWorker } from "react-icons/gr";
 import { ImProfile } from "react-icons/im";
+import { Helmet } from "react-helmet-async";
 
 const HRDashBoard = () => {
     const { user, loading } = useContext(AuthContext);
@@ -21,6 +22,9 @@ const HRDashBoard = () => {
 
     return (
         <div className="md:flex md:flex-row cinzel-font">
+            <Helmet>
+                <title>HR Dashboard</title>
+            </Helmet>
             <div className="md:w-64 min-h-screen bg-cyan-50 border-r-2 border-black mx-4">
                 <div className="p-6">
                     <p>{user.companyName}</p>

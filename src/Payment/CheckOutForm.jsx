@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "../Axios/useAxiosSecure";
 import { AuthContext } from "../Providers/AuthProviders";
+import { Helmet } from "react-helmet-async";
 
 const CheckOutForm = () => {
     const stripe = useStripe();
@@ -68,6 +69,9 @@ const CheckOutForm = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>CheckOut Form</title>
+            </Helmet>
             <form onSubmit={handleSubmit}>
                 <CardElement
                     options={{

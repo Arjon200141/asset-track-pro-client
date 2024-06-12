@@ -2,6 +2,7 @@ import { useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import useAxiosPublic from "../Axios/useAxiosPublic";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 
 const PackageSection = () => {
@@ -101,6 +102,9 @@ const PackageSection = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Add Employee</title>
+            </Helmet>
             <div className="bg-red-50 py-12 space-y-4">
                 <p className="text-3xl font-semibold text-center my-4">Current Employee in Team: {employeeCount}</p>
                 <p className="text-2xl font-semibold text-center my-4">Package Limit: 5</p>

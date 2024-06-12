@@ -1,5 +1,3 @@
-// src/components/JoinHR.js
-
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { SlArrowDown } from "react-icons/sl";
@@ -8,6 +6,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../Providers/AuthProviders";
 import useAxiosPublic from "../Axios/useAxiosPublic";
 import SocialLogin from "./SocialLogin";
+import { Helmet } from "react-helmet-async";
 
 const JoinHR = () => {
     const axiosPublic = useAxiosPublic();
@@ -65,6 +64,9 @@ const JoinHR = () => {
 
     return (
         <div className="bg-lime-50">
+            <Helmet>
+                <title>Join as HR</title>
+            </Helmet>
             <div className="mx-80 py-12">
                 <div className="hero min-h-screen">
                     <div className="w-full shadow-2xl bg-lime-100 rounded-xl">

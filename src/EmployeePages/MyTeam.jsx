@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Helmet } from 'react-helmet-async';
 
 const MyTeam = () => {
   const [members, setMembers] = useState([]);
@@ -49,6 +50,9 @@ const MyTeam = () => {
 
   return (
     <div className="container mx-auto py-8">
+      <Helmet>
+        <title>My Team</title>
+      </Helmet>
       <h1 className="text-3xl font-bold mb-4">Team Members</h1>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {members.map(member => (

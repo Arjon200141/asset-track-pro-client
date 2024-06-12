@@ -4,6 +4,7 @@ import { AuthContext } from "../Providers/AuthProviders";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../Axios/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const MyAssets = () => {
     const { user } = useContext(AuthContext);
@@ -75,6 +76,9 @@ const MyAssets = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>My Assets</title>
+            </Helmet>
             <div className="bg-sky-100 py-12">
                 <div className="flex flex-col justify-center md:flex-row gap-4 my-10">
                     <input

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import useAxiosPublic from "../Axios/useAxiosPublic";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AssetList = () => {
     const [assets, setAssets] = useState([]);
@@ -85,6 +86,9 @@ const AssetList = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Asset List</title>
+            </Helmet>
             <div className="p-4 bg-emerald-50">
                 <h2 className="text-4xl font-semibold text-center">All Assets</h2>
                 <div className="ml-60 flex flex-col md:flex-row gap-4 my-10">

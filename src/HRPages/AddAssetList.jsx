@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useAxiosSecure from "../Axios/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const AddAssetList = ({ onAssetAdded }) => {
     const [formData, setFormData] = useState({
@@ -42,6 +43,9 @@ const AddAssetList = ({ onAssetAdded }) => {
     };
     return (
         <div className="">
+            <Helmet>
+                <title>Add Asset List</title>
+            </Helmet>
             <div className="bg-sky-50 py-16">
                 <div className="mx-12">
                     <div className="hero min-h-screen ">

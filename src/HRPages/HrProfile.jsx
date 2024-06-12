@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../Providers/AuthProviders";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const HRProfile = _id => {
     const { user } = useContext(AuthContext);
@@ -51,6 +52,9 @@ const HRProfile = _id => {
 
     return (
         <div className="bg-violet-200 py-12">
+            <Helmet>
+                <title>Profile</title>
+            </Helmet>
             <div className="mb-12 space-y-3 border-2 border-solid border-black md:mx-40 md:p-12 py-12 rounded-xl bg-violet-50">
                 <h2 className="text-4xl font-semibold text-center mb-4">Current Details</h2>
                 {user && (
