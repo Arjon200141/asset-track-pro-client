@@ -80,7 +80,7 @@ const MyAssets = () => {
                 <title>My Assets</title>
             </Helmet>
             <div className="bg-sky-100 py-12">
-                <div className="flex flex-col justify-center md:flex-row gap-4 my-10">
+                <div className="flex flex-col justify-center md:flex-row md:gap-4 my-10">
                     <input
                         type="text"
                         placeholder="Search by product name"
@@ -109,10 +109,10 @@ const MyAssets = () => {
                     </select>
                 </div>
 
-                <div className="overflow-x-auto mx-12">
-                    <table className="table table-md">
+                <div className="overflow-x-auto md:mx-12">
+                    <table className="table md:table-md">
                         <thead>
-                            <tr className="text-lg">
+                            <tr className="md:text-lg">
                                 <th></th>
                                 <th>Asset Name</th>
                                 <th>Asset Type</th>

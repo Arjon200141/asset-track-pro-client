@@ -13,7 +13,7 @@ const EmployeeHome = () => {
             </Helmet>
             <MyPending></MyPending>
             <MonthlyReq></MonthlyReq>
-            <div className="m-8 my-16">
+            <div className="md:m-8 my-16">
                 <Calendar></Calendar>
             </div>
             <Notice></Notice>

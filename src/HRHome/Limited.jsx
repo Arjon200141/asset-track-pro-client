@@ -23,18 +23,18 @@ const Limited = () => {
     };
 
     return (
-        <div className="bg-blue-50 p-16 my-12">
+        <div className="bg-blue-50 md:p-16 my-12">
             <h2 className="text-3xl font-semibold text-center">Limited Stock Items (Quantity Less Than 10)</h2>
-                    <div className="overflow-x-auto ml-44 mt-6">
-                    <table className="table table-xl">
+                    <div className="overflow-x-auto md:ml-44 mt-6">
+                    <table className="table md:table-xl">
                         <thead>
-                            <tr className="text-2xl ">
+                            <tr className="md:text-2xl ">
                                 <th>Serial No</th>
                                 <th>Product Name</th>
                                 <th>Product Quantity</th>
                             </tr>
                         </thead>
-                        <tbody className="text-lg">
+                        <tbody className="md:text-lg">
                         {limitedStockAssets.map((asset,index) => (
                                 <tr key={index}>
                                     <td>{index+1}</td>

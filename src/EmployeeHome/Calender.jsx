@@ -33,7 +33,7 @@ const Calendar = () => {
             );
         }
 
-        return <div className="flex justify-between text-center bg-gray-100 py-2 px-4">{days}</div>;
+        return <div className="flex justify-between text-center bg-gray-100 py-2 md:px-4">{days}</div>;
     };
 
     const renderCells = () => {
@@ -55,7 +55,7 @@ const Calendar = () => {
                 days.push(
                     <div
                         key={day}
-                        className={`w-1/7 h-20 flex items-center justify-center cursor-pointer ${day.getMonth() === currentMonth.getMonth() ? 'bg-white' : 'bg-white'} ${day.toDateString() === new Date().toDateString() ? 'bg-blue-100 px-3 rounded-xl' : ''}`}
+                        className={`w-1/7 h-20 flex items-center justify-center cursor-pointer ${day.getMonth() === currentMonth.getMonth() ? 'bg-white' : 'bg-white'} ${day.toDateString() === new Date().toDateString() ? 'bg-blue-100 md:px-3 rounded-xl' : ''}`}
                         onClick={() => onDateClick(cloneDay)}
                     >
                         <span>{formattedDate}</span>
@@ -87,7 +87,7 @@ const Calendar = () => {
 
     return (
         <div>
-            <div className=" p-12 text-center mx-12 shadow-lg rounded-lg">
+            <div className=" md:p-12 text-center md:mx-12 shadow-lg rounded-lg">
                 {renderHeader()}
                 {renderDays()}
                 {renderCells()}

@@ -50,12 +50,12 @@ const TopReq= () => {
 
     return (
         <div className="bg-teal-50">
-            <div className="m-12 py-12 pl-44">
-                <h2 className="text-4xl font-semibold text-center my-8">Top Most Requested Items</h2>
-                <div className="overflow-x-auto mx-12 mt-6">
-                    <table className="table table-lg">
+            <div className="md:m-12 py-12 md:pl-44">
+                <h2 className="md:text-4xl font-semibold text-center my-8">Top Most Requested Items</h2>
+                <div className="overflow-x-auto md:mx-12 mt-6">
+                    <table className="table md:table-lg">
                         <thead>
-                            <tr className="text-xl">
+                            <tr className="md:text-xl">
                                 <th>Serial No</th>
                                 <th>Product Name</th>
                                 <th>Product Type</th>

@@ -56,7 +56,7 @@ const JoinEmployee = () => {
             <Helmet>
                 <title>Join as Employee</title>
             </Helmet>
-            <div className="mx-80 py-12">
+            <div className="md:mx-80 py-12">
                 <div className="hero min-h-screen">
                     <div className="w-full shadow-2xl bg-sky-100 rounded-xl">
                         <h2 className="text-4xl font-semibold text-center mt-8">Register a New Employee</h2>

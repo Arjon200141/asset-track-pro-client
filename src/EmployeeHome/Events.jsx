@@ -31,9 +31,9 @@ const events = [
 
 const Events = () => {
   return (
-    <div className="p-8">
+    <div className="md:p-8">
       <h2 className="text-3xl font-bold text-center mb-6">Upcoming Events</h2>
-      <div className="grid gap-6 lg:grid-cols-3 sm:grid-cols-2">
+      <div className="grid md:gap-6 lg:grid-cols-3 sm:grid-cols-2">
         {events.map(event => (
           <div key={event.id} className="card bg-base-100 shadow-xl">
             <div className="card-body">

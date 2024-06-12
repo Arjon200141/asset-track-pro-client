@@ -2,7 +2,7 @@ const FAQs = () => {
     return (
         <div>
             <h2 className="text-3xl font-semibold text-center my-6">Frequently Asked Questions</h2>
-            <div className="flex gap-12 ">
+            <div className="flex flex-col md:flex-row gap-12 ">
 
                 <div className="flex-1">
                     <img src="https://i.ibb.co/27BQGTv/faqs-concept-illustration-114360-5185.jpg" alt="" />

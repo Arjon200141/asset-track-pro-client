@@ -19,12 +19,12 @@ const HRPendingReq = () => {
 
     return (
         <div className="bg-orange-50">
-            <div className="py-10 px-16 mb-20">
-            <h2 className="text-4xl font-semibold text-center my-12">Pending Requests (Max: 5 items)</h2>
+            <div className="py-10 md:px-16 mb-20">
+            <h2 className="md:text-4xl font-semibold text-center my-12">Pending Requests (Max: 5 items)</h2>
             <div className="overflow-x-auto">
-                <table className="table table-lg">
+                <table className="table md:table-lg">
                     <thead>
-                        <tr className="text-xl">
+                        <tr className="md:text-xl">
                             <th>Employee</th>
                             <th>Product Name</th>
                             <th>Product Type</th>

@@ -47,7 +47,7 @@ const AddAssetList = ({ onAssetAdded }) => {
                 <title>Add Asset List</title>
             </Helmet>
             <div className="bg-sky-50 py-16">
-                <div className="mx-12">
+                <div className="md:mx-12">
                     <div className="hero min-h-screen ">
                         <div className=" w-full shadow-2xl bg-sky-100 rounded-xl">
                             <h2 className="text-4xl font-semibold text-center mt-8">Add an Asset</h2>

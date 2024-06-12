@@ -1,8 +1,8 @@
 const Notice = () => {
   return (
-    <div className="bg-gray-100 p-6 rounded-lg shadow-md mx-6 my-16">
+    <div className="bg-gray-100 p-6 rounded-lg shadow-md md:mx-6 my-16">
       <h2 className="text-2xl font-bold text-blue-600 mb-4">Notice Board</h2>
-      <div className="bg-white p-4 rounded-lg shadow-sm">
+      <div className="bg-white md:p-4 rounded-lg shadow-sm">
         <h3 className="text-xl font-semibold mb-2">Welcome to <span className="font-semibold">AsseTrack Pro</span>, Asset Management System</h3>
         <p className="mb-2">
           AssetTrack Pro is excited to introduce our new web application designed to help businesses manage their assets and products efficiently. Our software aims to simplify the process for HR Managers to track employee usage of company assets.

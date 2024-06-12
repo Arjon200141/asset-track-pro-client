@@ -31,7 +31,7 @@ const SocialLogin = ({ role }) => {
 
     return (
         <div className="text-center mt-4">
-            <button onClick={handleGoogleSignIn} className="btn btn-outline w-full text-lg font-semibold py-2">
+            <button onClick={handleGoogleSignIn} className="btn btn-outline text-lg font-semibold py-2">
                 <FcGoogle size={24} className="mr-2" /> Continue with Google
             </button>
         </div>

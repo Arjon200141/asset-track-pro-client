@@ -104,7 +104,7 @@ const AssetList = () => {
             </Helmet>
             <div className="p-4 bg-emerald-50">
                 <h2 className="text-4xl font-semibold text-center">All Assets</h2>
-                <div className="ml-60 flex flex-col md:flex-row gap-4 my-10">
+                <div className="md:ml-60 flex flex-col md:flex-row gap-4 my-10">
                     <input
                         type="text"
                         placeholder="Search by product name"
@@ -164,7 +164,7 @@ const AssetList = () => {
                                     <td>{asset.stockStatus}</td>
                                     <td>{asset.assetType}</td>
                                     <td>{asset.dateAdded}</td>
-                                    <td className="flex gap-6 mt-4 justify-center">
+                                    <td className="flex md:gap-6 mt-4 justify-center">
                                         <Link to={`/updateasset/${asset._id}`}>
                                             <button>Update</button>
                                         </Link>
@@ -187,7 +187,7 @@ const AssetList = () => {
                         onPageChange={handlePageClick}
                         containerClassName={"pagination"}
                         activeClassName={"active"}
-                        className="bg-green-200 py-4 px-8 rounded-xl flex gap-12 my-4 font-semibold"
+                        className="bg-green-200 py-4 md:px-8 rounded-xl flex md:gap-12 my-4 font-semibold"
                     />
                 </div>
             </div>

@@ -30,10 +30,10 @@ const MonthlyReq = () => {
     return (
         <div className="bg-orange-50 py-12">
             <h2 className="text-4xl font-semibold text-center my-6">Monthly Requests</h2>
-            <div className="overflow-x-auto mx-56">
-                <table className="table table-lg">
+            <div className="overflow-x-auto md:mx-56">
+                <table className="table md:table-lg">
                     <thead>
-                        <tr className="text-xl">
+                        <tr className="md:text-xl">
                             <th>Product Name</th>
                             <th>Product Type</th>
                             <th>Request Date</th>

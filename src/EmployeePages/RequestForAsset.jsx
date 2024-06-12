@@ -92,7 +92,7 @@ const RequestForAsset = () => {
             <Helmet>
                 <title>Request for Asset</title>
             </Helmet>
-            <div className="p-4 bg-fuchsia-50 pl-40">
+            <div className="p-4 bg-fuchsia-50 md:pl-40">
                 <h2 className="text-4xl font-semibold text-center">All Assets</h2>
                 <div className="flex flex-col justify-center md:flex-row gap-4 my-10">
                     <input
@@ -121,10 +121,10 @@ const RequestForAsset = () => {
                         <option value="Non-returnable">Non-returnable</option>
                     </select>
                 </div>
-                <div className="overflow-x-auto mx-12">
-                    <table className="table table-lg">
+                <div className="overflow-x-auto md:mx-12">
+                    <table className="table md:table-lg">
                         <thead>
-                            <tr className="text-xl">
+                            <tr className="md:text-xl">
                                 <th>Product Name</th>
                                 <th>Product Type</th>
                                 <th>Stock Status</th>
@@ -199,7 +199,7 @@ const RequestForAsset = () => {
                                     />
                                 </label>
                             </div>
-                            <div className="flex gap-6 mt-4">
+                            <div className="flex md:gap-6 mt-4">
                                 <label className="form-control w-full">
                                     <div className="label">
                                         <span className="label-text text-xl font-semibold">Additional Notes</span>

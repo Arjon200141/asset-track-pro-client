@@ -7,7 +7,7 @@ const Payment = () => {
     const stripePromise = loadStripe('pk_test_51PQkr9DcLfNezDuz0cS6MYY0n1aw9pnt9OUwsiq9gJxC74GPTDgdttxslveH6Q1tOAlhpaVW4em55He0t29WmphP00jnmiwCMG');
     console.log(stripePromise);
     return (
-        <div className="mx-40 my-12">
+        <div className="md:mx-40 my-12">
             <Helmet>
                 <title>Payment</title>
             </Helmet>

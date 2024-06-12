@@ -85,7 +85,7 @@ const AllRequest = () => {
                 <div className="overflow-x-auto ">
                     <table className="table table-sm">
                         <thead>
-                            <tr className="text-md">
+                            <tr className="md:text-md">
                                 <th>Asset Name</th>
                                 <th>Asset Type</th>
                                 <th>Email of requester</th>
@@ -139,7 +139,7 @@ const AllRequest = () => {
                         onPageChange={handlePageChange}
                         containerClassName={'pagination'}
                         activeClassName={'active'}
-                        className="bg-green-200 py-4 px-2 md:px-8 rounded-xl flex gap-4\ md:gap-12 my-4 font-semibold"
+                        className="bg-green-200 py-4 px-2 md:px-8 rounded-xl flex gap-4 md:gap-12 my-4 font-semibold"
                     />
                 </div>
             </div>

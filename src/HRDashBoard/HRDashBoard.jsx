@@ -25,12 +25,12 @@ const HRDashBoard = () => {
             <Helmet>
                 <title>HR Dashboard</title>
             </Helmet>
-            <div className="md:w-64 min-h-screen bg-cyan-50 border-r-2 border-black mx-4">
-                <div className="p-6">
+            <div className="md:w-64 min-h-screen bg-cyan-50 border-r-2 border-black md:mx-4">
+                <div className="md:p-6">
                     <p>{user.companyName}</p>
                     <img src={user.companyLogo} alt='' className="w-24 h-24" />
                 </div>
-                <ul className="space-y-3 py-8 pl-6 text-lg">
+                <ul className="space-y-3 py-8 md:pl-6 text-lg">
                     <li className="flex items-center gap-2">
                         <FaHome />
                         <NavLink to="/dashboard/hrhome">HR HOME</NavLink>

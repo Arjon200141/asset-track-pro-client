@@ -13,17 +13,22 @@ const Navbar = () => {
     return (
         <div className="navbar bg-sky-50">
             <div className="navbar-start">
-                <ul className="text-xl font-medium menu hidden menu-sm mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/employeejoin">Join as Employee</Link></li>
-                    <li><Link to="/hrjoin">Join as HR Manager</Link></li>
-                    {userRole === 'hr' && <li><Link to="/dashboard/hrhome">HR Dashboard</Link></li>}
-                    {userRole === 'employee' && <li><Link to="/employeedashboard/emphome">Employee Dashboard</Link></li>}
-                </ul>
-                <a className="btn btn-ghost text-3xl font-bold"><span className="text-red-600">AssetTrack</span> Pro</a>
+                <div className="dropdown">
+                    <div tabIndex={0} role="button" className="btn btn-ghost md:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                    </div>
+                    <ul className="text-xl font-medium menu menu-sm dropdown-content gap-3 mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/employeejoin">Join as Employee</Link></li>
+                        <li><Link to="/hrjoin">Join as HR Manager</Link></li>
+                        {userRole === 'hr' && <li><Link to="/dashboard/hrhome">HR Dashboard</Link></li>}
+                        {userRole === 'employee' && <li><Link to="/employeedashboard/emphome">Employee Dashboard</Link></li>}
+                    </ul>
+                    <a className=" md:text-3xl font-bold"><span className="text-red-600">AssetTrack</span> Pro</a>
+                </div>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="ml-20 gap-2 text-lg font-medium  menu menu-horizontal px-1">
+                <ul className="md:ml-20 gap-2 text-lg font-medium  menu menu-horizontal px-1">
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/employeejoin">Join as Employee</Link></li>
                     <li><Link to="/hrjoin">Join as HR Manager</Link></li>

@@ -50,19 +50,19 @@ const EmployeeList = () => {
             <Helmet>
                 <title>Employee List</title>
             </Helmet>
-            <div className="p-4 bg-fuchsia-50 pl-12">
+            <div className="p-4 bg-fuchsia-50 md:pl-12">
                 <h2 className="text-4xl font-semibold text-center">Employee List</h2>
-                <div className="overflow-x-auto mx-12">
+                <div className="overflow-x-auto md:mx-12">
                     <h2 className='text-2xl font-semibold text-center my-8'>Total Members: {employees.length}</h2>
-                    <table className="table table-lg">
+                    <table className="table md:table-lg">
                         <thead>
-                            <tr className="text-2xl">
+                            <tr className="md:text-2xl">
                                 <th>Email</th>
                                 <th>Name</th>
                                 <th>Remove From Team</th>
                             </tr>
                         </thead>
-                        <tbody className='text-xl'>
+                        <tbody className='md:text-xl'>
                             {employees.map((employee, index) => (
                                 <tr  key={index}>
                                     <td>{employee.email}</td>

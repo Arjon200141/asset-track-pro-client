@@ -22,11 +22,11 @@ const MyPending = () => {
 
     return (
         <div className=" bg-fuchsia-50 py-12 ">
-            <h2 className="text-4xl font-semibold text-center">Pending Requests</h2>
-            <div className="overflow-x-auto mx-12 mt-6">
-                <table className="table table-lg">
+            <h2 className="md:text-4xl font-semibold text-center">Pending Requests</h2>
+            <div className="overflow-x-auto md:mx-12 mt-6">
+                <table className="table md:table-lg">
                     <thead>
-                        <tr className="text-xl">
+                        <tr className="md:text-xl">
                             <th>Product Name</th>
                             <th>Product Type</th>
                             <th>Request Date</th>
