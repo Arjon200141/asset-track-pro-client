@@ -2,44 +2,43 @@
 
 AssetTrack Pro is a comprehensive web application designed to facilitate asset and product management for businesses. It allows companies to efficiently track and manage their assets, ensuring optimal utilization and accountability across their workforce.
 
-## Features
-
-- **HR and Employee Authentication:** Secure login and authentication system for HR managers and employees using Firebase Authentication.
-- **Joining as Employee:** Seamless registration process for new employees through Firebase Authentication.
-- **Frontend Development:** Built with React.js for a modern, responsive, and user-friendly interface.
-- **Backend with Node.js:** Backend server implemented in Node.js, providing a robust foundation for handling business logic and database interactions.
-- **MongoDB Database:** Utilizes MongoDB for storing asset details, providing scalability and flexibility in data management.
-- **Asset Management:** Comprehensive tools for HR managers to track assets, categorizing them into returnable (e.g., laptops, phones) and non-returnable (e.g., stationery).
-- **User Management:** Admin capabilities to manage user roles, permissions, and access control within the application.
-- **CRUD Operations:** Full CRUD (Create, Read, Update, Delete) functionality for managing assets, allowing seamless updates and modifications.
-- **Dashboard Interface:** Interactive dashboards for HR managers to view analytics, pending requests, top requested items, and items with limited stock.
-- **Data Visualization:** Includes visual representation such as charts (e.g., pie chart for returnable vs. non-returnable items) for insightful data analysis.
-- **Subscription-based Access:** Subscription model for companies to access and utilize the AssetTrack Pro application, ensuring secure and scalable deployment.
-- **TanStack Query:** Efficient data fetching, caching, and synchronization using TanStack Query.
-- **Pagination:** Seamless pagination for asset listings and user management to enhance performance and usability.
-- **React Helmet:** Manage document head to set metadata and improve SEO.
-
-## Admin Credentials
-
-- **HR Email:** arjon1236@gmail.com
-- **Password:** [123456Ab]
-
 ## Live Site
 
 Visit AssetTrack Pro live at [https://assettrack-pro.web.app/](https://assettrack-pro.web.app/)
 
-## Getting Started
+## Special Features
 
-To run the project locally:
+- **HR and Employee Authentication:** Secure login and authentication system for HR managers and employees using Firebase Authentication.
+- **Asset Management:** Comprehensive tools for HR managers to track assets, categorizing them into returnable (e.g., laptops, phones) and non-returnable (e.g., stationery).
+- **User Management:** Admin capabilities to manage user roles, permissions, and access control within the application.
+- **Dashboard Interface:** Interactive dashboards for HR managers to view analytics, pending requests, top requested items, and items with limited stock.
+- **TanStack Query:** Efficient data fetching, caching, and synchronization using TanStack Query.
 
-1. Clone this repository.
-2. Install dependencies using `npm install`.
-3. Configure Firebase credentials and MongoDB connection details.
-4. Start the development server using `npm start`.
+## Admin Credentials
+- **HR Email:** arjon1236@gmail.com
+- **Password:** [123456Ab]
 
-## Installation
+## Technologies Used
+- HTML
+- CSS
+- JavaScript
+- React
+- Firebase
+- NodeJs
+- MongoDb
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/assettrack-pro.git
-   cd assettrack-pro
+## npm Packages
+- React Helmet
+- React Pagination
+- TanStack Query 
+
+
+## Cloning and Running the Project Locally
+
+Clone the repository: 
+- git clone <https://github.com/Arjon200141/asset-track-pro-client.git>
+- Navigate to the project directory: cd asset-track-pro-client
+- Install dependencies: npm install
+- Start the development server: npm start
+- Ensure you have Node.js and npm installed on your machine before following these steps.
+
